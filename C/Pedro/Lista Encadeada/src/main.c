@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "itemListaEnc.h"
+#include "../include/itemListaEnc.h"
 
 int main() {
     Lista *l;
