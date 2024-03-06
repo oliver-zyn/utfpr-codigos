@@ -1,0 +1,2 @@
+gcc -o ./output/program.exe ./src/main.c ./src/itemListaEnc.c
+./output/program.exe
