@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&family=Roboto:wght@300;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100&family=Roboto:wght@100&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100&family=Raleway:wght@100;200;300&family=Roboto:wght@100&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500&family=Hind:wght@300&family=Montserrat:wght@100;300&family=Raleway&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Montserrat', Helvetica, sans-serif;
+}
+
+nav {
+  padding: 0 5rem;
+  background: #343a40;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo img {
+  max-width: 60px;
+  width: 100%;
+}
+
+.menu ul {
+  display: flex;
+  align-items: center;
+  gap: 4rem;
+  list-style: none;
+}
+
+.menu a {
+  text-decoration: none;
+  color: #fff;
+  padding: 0.625rem;
+  border-radius: 5px;
+}
+
+.menu a:hover {
+  background-color: #585858;
+}
+
+.menu i {
+  font-size: 1.2rem;
+}
