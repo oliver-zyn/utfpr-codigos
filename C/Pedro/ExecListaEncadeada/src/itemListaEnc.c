@@ -156,10 +156,36 @@ Lista *concatenacaoDeLista(Lista *lst1, Lista *lst2) {
     insereFimLista(lstConcatenada, aux->item.chave);
   }
 
-  imprimeLista(lst1);
-  printf("\n---------------------");
-  imprimeLista(lst2);
-  printf("\n---------------------");
-  imprimeLista(lstConcatenada);
   return lstConcatenada;
+}
+
+void *insereOrdenado(Lista *lst, int chave) {
+  Celula *aux = malloc(sizeof(Celula));
+
+  if(verificaListaVazia(lst)) {
+    lst->primeira = aux;
+  } else if (aux->item.chave < lst->primeira) {
+    insereInicioLista(lst, aux);
+  } else {
+    Celula *atual = lst->primeira;
+    while (atual->prox != NULL && atual->item.chave < aux->item.chave) {
+        atual = atual->prox;
+    }
+
+    aux->prox = atual->prox;
+    atual->prox = aux;
+
+    if (aux->prox == NULL) { // Atualiza a última se inserido no final
+        insereFimLista(lst, aux);
+    }
+  }
+}
+
+Lista *ordenaLista(Lista *lst1, Lista *lst2) {
+    Celula *atual = lst1->primeira;
+    while (atual != NULL) {
+        insereOrdenado(lst2, atual->item.chave);
+        atual = atual->prox;
+    }
+    return lst2;
 }

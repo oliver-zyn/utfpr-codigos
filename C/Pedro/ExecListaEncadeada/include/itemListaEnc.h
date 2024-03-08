@@ -13,3 +13,5 @@ void removeItem(Lista *lst, int x);
 void liberaLista(Lista *lst);
 
 Lista *concatenacaoDeLista(Lista *lst1, Lista *lst2);
+void *insereOrdenado(Lista *lst, int chave);
+Lista *ordenaLista(Lista *lst1, Lista *lst2);
