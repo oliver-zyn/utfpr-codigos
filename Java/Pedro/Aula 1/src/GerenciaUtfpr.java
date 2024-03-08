@@ -1,6 +1,8 @@
-package br.edu.utfpr.javaretomada;
-
 import java.util.ArrayList;
+
+import br.edu.utfpr.javaretomada.Academico;
+import br.edu.utfpr.javaretomada.Curso;
+import br.edu.utfpr.javaretomada.Turma;
 
 public class GerenciaUtfpr {
     public static void main(String[] args) {
@@ -20,7 +22,7 @@ public class GerenciaUtfpr {
         t3p.setCursoOferta(ads);
         t3p.setSemestre(5);
 
-        ArrayList<Academico> listaA = new ArrayList();
+        ArrayList<Academico> listaA = new ArrayList<>();
 
         listaA.add(acad1);
         t3p.setListaAcademico(listaA);
