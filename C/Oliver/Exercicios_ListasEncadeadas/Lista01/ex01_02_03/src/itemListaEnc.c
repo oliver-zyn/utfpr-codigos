@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "../include/itemListaEnc.h"
 
 struct item {
@@ -159,47 +160,6 @@ Lista *concatenarListas(Lista *lst1, Lista *lst2) {
 }
 
 //3. Escreva uma função que recebe duas listas. A primeira guarda n números inteiros e a segunda está vazia. A função deve inserir os elementos da primeira lista na segunda lista, de maneira ordenada
-
-// void insereOrdenadosOutraLista(Lista *lst1, Lista *lst2) {
-//   Celula *aux1 = lst1->primeira;
-  
-//   // Percorre a Lista 1
-//   while (aux1 != NULL) {
-//     int chaveAtual = aux1->item.chave;
-
-//     // Insere ordenado na Lista 2
-//     Celula *aux2 = lst2->primeira;
-//     Celula *anterior = NULL;
-
-//     while (aux2 != NULL && aux2->item.chave < chaveAtual) {
-//       anterior = aux2;
-//       aux2 = aux2->prox;
-//     }
-
-//     // Cria uma nova célula para o elemento atual da Lista 1
-//     Celula *nova = malloc(sizeof(Celula));
-//     nova->item.chave = chaveAtual;
-
-//     // Insere a nova célula na Lista 2
-//     if (anterior == NULL) {
-//       // Inserção no início da Lista 2
-//       nova->prox = lst2->primeira;
-//       lst2->primeira = nova;
-//     } else {
-//       // Inserção no meio ou fim da Lista 2
-//       nova->prox = aux2;
-//       anterior->prox = nova;
-//     }
-
-//     aux1 = aux1->prox;  // Avança para o próximo elemento da Lista 1
-//   }
-
-//   printf("\nLISTA 1:\n");
-//   imprimeLista(lst1);
-//   printf("\nLISTA 2:\n");
-//   imprimeLista(lst2);
-// }
-
 
 void insereOrdenadosOutraLista(Lista *lst1, Lista *lst2) {
   Celula *aux1;
