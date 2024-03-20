@@ -12,7 +12,14 @@
 
 body {
   font-family: 'Montserrat', Helvetica, sans-serif;
+  background-image: url('../img/hero-bg.png');
 }
+
+a {
+  text-decoration: none;
+}
+
+/* HEADER */
 
 nav {
   padding: 0 5rem;
@@ -23,8 +30,7 @@ nav {
 }
 
 .logo img {
-  max-width: 60px;
-  width: 100%;
+  width: 60px;
 }
 
 .menu ul {
@@ -35,7 +41,6 @@ nav {
 }
 
 .menu a {
-  text-decoration: none;
   color: #fff;
   padding: 0.625rem;
   border-radius: 5px;
@@ -48,3 +53,97 @@ nav {
 .menu i {
   font-size: 1.2rem;
 }
+
+/* CONTEUDO */
+
+.intro {
+  display: flex;
+  padding: 5rem;
+  gap: 2rem;
+}
+
+.content-img {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.content p {
+  line-height: 1.5;
+}
+
+.btn-container {
+  text-align: center;
+}
+
+.btn-default {
+  color: #fff;
+  padding: 1rem 2rem;
+  border-radius: 5px;
+  text-transform: uppercase;
+}
+
+.btn-purple {
+  background: #8a008a;
+}
+
+.btn-purple:hover {
+  transition: .2s ease;
+  background: #a700a7;
+}
+
+.btn-green {
+  background: #008600;
+}
+
+.btn-green:hover {
+  transition: .2s ease;
+  background: #009b00;
+}
+
+/* GALERIA DE IMAGENS */
+
+main {
+  padding: 0 5rem;
+  width: 100%;
+}
+
+.gallery {
+  width: 100%;
+  text-align: center;
+}
+
+.gallery > h1 {
+  margin-bottom: 3rem;
+}
+
+.gallery > section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+article {
+  position: relative;
+}
+
+article h1 {
+  background: rgba(255, 255, 255, 0.808);
+  position: absolute;
+  padding: 0.5rem;
+  line-height: none;
+  bottom: 0;
+  width: 100%;
+}
+
+article img {
+  width: 100%;
+  height: 100%;
+}
+
