@@ -60,7 +60,6 @@ void insereInicio_Deque(Deque* dq, int chave, int qtd)
     nova->item = novo;
     nova->prox = dq->ini;
     if (verificaDequeVazia(dq)) {
-        printf("Pau 2");
         dq->fim = nova;
     }
     dq->ini = nova;
@@ -136,24 +135,24 @@ void libera_Deque(Deque* dq)
 
 // Ex 2
 
-// void implementaQtdArvore(Deque *dq, int chaveArvore) {
-//     Celula *aux = dq->ini;
+void implementaQtdArvore(Deque *dq, int chaveArvore) {
+    Celula *aux = dq->ini;
 
-//     if(verificaDequeVazia(dq)) {
-//         insereFinal_Deque(dq, chaveArvore, 1);
-//         return;
-//     }
+    if(verificaDequeVazia(dq)) {
+        insereFinal_Deque(dq, chaveArvore, 1);
+        return;
+    }
 
-//     while(aux != NULL) {
-//         if(aux->item.chaveArvore == chaveArvore) {
-//             aux->item.qtd = aux->item.qtd + 1;
-//             return;
-//         }
-//         aux = aux->prox;
-//     }
+    while(aux != NULL) {
+        if(aux->item.chaveArvore == chaveArvore) {
+            aux->item.qtd = aux->item.qtd + 1;
+            return;
+        }
+        aux = aux->prox;
+    }
 
-//     insereFinal_Deque(dq, chaveArvore, 1);
-// }
+    insereFinal_Deque(dq, chaveArvore, 1);
+}
 
 void imprimePorcentagemPorEspecie(Deque *dq) {
     Celula *aux = dq->ini;
@@ -163,13 +162,14 @@ void imprimePorcentagemPorEspecie(Deque *dq) {
         return;
     }
 
-    int totalQtd = totalQtdArvore(dq);
+    float totalQtd = totalQtdArvore(dq);
 
     printf("Porcentagem das arvores\n");
     while (aux != NULL) {
-        printf("Especie: %d Porcentagem: %.0f%%\n", aux->item.chaveArvore, ((aux->item.qtd/totalQtd) * 100));
+        printf("Especie: %d Porcentagem: %.1f%%\n", aux->item.chaveArvore, ((aux->item.qtd/totalQtd) * 100));
         aux = aux->prox;
     }
+    printf("\n");
 }
 
 int totalQtdArvore(Deque *dq) {
