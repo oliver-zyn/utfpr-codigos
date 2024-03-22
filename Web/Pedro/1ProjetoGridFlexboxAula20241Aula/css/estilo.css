@@ -1,0 +1,260 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&family=Roboto:wght@300;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100&family=Roboto:wght@100&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100&family=Raleway:wght@100;200;300&family=Roboto:wght@100&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500&family=Hind:wght@300&family=Montserrat:wght@100;300&family=Raleway&display=swap');
+
+:root{
+    --dark:#343a40;
+}
+
+
+body{
+    font-family: "Montserrat", Geneva, Tahoma, sans-serif;
+}
+
+.bg-dark{
+    background-color: var(--dark);
+}
+
+.logo img{
+  width: 60px;
+  height: 60px;
+}
+
+.menu li{
+    display: inline;
+    padding: 10px 20px 5px 2px;
+    /* border: solid 1px rgb(238, 255, 0); */
+}
+
+.menu a{
+    color: #fff;
+    text-decoration: none;
+    padding: 10px;
+}
+
+.menu a:hover{
+    background-color: #555757;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.nav{
+    display: flex;
+    /* valor padrão da propriedade flex-direction:row */
+    flex-direction: row; 
+    justify-content: center;
+    align-items: center;
+}
+
+/* .menu, .logo{
+    border: solid 2px #f00;
+} */
+
+/* .nav>div{
+    border: solid 2px #f00; 
+} */
+
+.grow1{
+    flex-grow: 1;
+}
+
+.grow2{
+    flex-grow: 2;
+}
+
+
+.menu ul, .logo{
+    text-align: center;
+}
+
+.flex{
+    display: flex;
+}
+
+.flexColumn{
+    flex-direction: column;
+}
+
+.btn{
+    text-transform: uppercase;
+    border-radius: 5px;
+    /* background-color: blueviolet; */
+    color: #fff;
+    padding: 12px 20px;
+    text-decoration: none;
+  
+
+}
+
+.btn-blue{
+    background-color: rgb(33, 0, 94);
+}
+
+.btn-green{
+    background-color: rgb(0, 93, 14);
+}
+
+.banner-buttons{
+    margin-top: 32px;
+    text-align: center;
+}
+
+.banner p, .banner h2{
+    padding: 10px;
+}
+
+.banner img{
+    width: 80%;
+}
+
+.banner{
+    /* border: solid 5px #f00; */
+    background: url('../img/hero-bg.png') center / cover no-repeat fixed ;
+    position: relative;
+    top: 5rem;
+    z-index: 2;
+} 
+
+*{
+    margin: 0;
+}
+
+
+/* Galeria */
+.card-gallery{
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 5px;
+    /* limita a altura das linhas implícitas */
+  grid-auto-rows: 300px; 
+
+
+}
+
+/* .card-gallery article{
+    border: 1px solid #f00;
+} */
+
+.card-gallery img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.h-1{
+    grid-row: span 1;
+}
+
+.h-2{
+    grid-row: span 2;
+}
+
+.w-1{
+    grid-column: span 1;
+}
+
+.w-2{
+    grid-column: span 2;
+}
+
+.w-4{
+    grid-column: span 4;
+}
+
+.card-gallery article{
+    background-color: var(--dark);
+    position: relative;
+}
+
+.card-gallery h1{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(255, 255, 255, .8);
+    width: calc(100% - 20px);
+    padding: 10px;
+    text-align: center;
+}
+
+.card-gallery h2, .card-gallery p{
+    color: #fff;
+    padding: 16px;
+    line-height: 1.5rem;
+  }
+
+  .card-gallery .text-gallery {
+  
+    position: absolute;
+    top: 0;
+    color: #343a40;
+  }
+
+header {
+    position: fixed;
+    width: 100%;
+    height: 5rem;
+    z-index: 5;
+}
+
+.gallery {
+    position: relative;
+    top: 5rem;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+.services {
+    margin-top: 7rem;
+    margin-bottom: 5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.8rem;
+}
+
+.cards-serv {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.card_services {
+    width: 25%;
+    border-radius: 1rem;
+    min-height: 360px;
+    background-color: #ddebeb;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    text-align: center;
+    width: 100%;
+    max-width: 330px;
+    box-shadow: 1px 1px 4px rgba(114, 111, 111, 0.492);
+}
+
+.card_services > img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background-color: #fff;
+}
+
+.services > h1 {
+    text-align: center;
+    font-size: 1.9rem;
+}
+
+.card_services h2 {
+    font-size: 1.9rem;
+}
+
+.card_services p {
+    font-size: 1.1rem;
+}
