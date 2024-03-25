@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <link rel="stylesheet" href="css/estilo.css">
+    <title>Projeto FlexBox e Grid</title>
+</head>
+
+<body>
+    <header>
+        <nav class="bg-dark nav">
+            <!-- logo -->
+            <div class="logo grow1">
+                <a href="index.html"><img src="img/logo.png" alt="Logo do projeto" title="Logo"></a>
+            </div>
+            <!-- menu principal -->
+            <div class="menu grow2">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#galeria">Galeria</a></li>
+                    <li><a href="">Serviços</a></li>
+                    <li><a href="">Depoimentos</a></li>
+                    <li><a href="">Sobre</a></li>
+                </ul>
+            </div>
+            <!-- menu contato / login -->
+            <div class="menu grow1">
+                <ul>
+                    <li><a href=""><i class="fas fa-envelope"></i></a></li>
+                    <li><a href=""><i class="fas fa-user"></i></a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <section class="banner flex" id="banner">
+        <div>
+            <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. </h2>
+            <img src="img/undraw_stripe_payments_re_chlm.svg" alt="Imagem">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam ex qui, impedit laboriosam, facere vel
+                quibusdam tempore possimus placeat voluptate fugit architecto? Dolorum vel aliquid amet adipisci ullam,
+                fuga soluta?</p>
+        </div>
+        <div>
+            <div>
+                <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. </h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur veritatis tempore blanditiis earum
+                    ipsa, a fuga, iure possimus deserunt harum recusandae quod officia, temporibus voluptas officiis rem
+                    aliquid nostrum quo.</p>
+                <p>Lorem ipsu m dolor sit amet consectetur adipisicing elit. Pariatur veritatis tempore blanditiis earum
+                    ipsa, a fuga,
+                    iure possimus deserunt harum recusandae quod officia, temporibus voluptas officiis rem aliquid
+                    nostrum quo.
+                </p>
+            </div>
+
+
+            <div class="banner-buttons">
+                <a href="" class="btn btn-blue">Portfolio</a>
+                <a href="" class="btn btn-green">Sobre</a>
+            </div>
+        </div>
+    </section>
+ 
+
+    <main>
+        <section class="gallery" id="galeria">
+            <h1>Galeria de imagens</h1>
+            <section class="card-gallery">
+                <article class="w-2 h-2">
+                    <img src="img/2841901.jpg" alt="">
+                    <h1>Título do artigo</h1>
+                </article>
+
+                <article class="w-2 h-1">
+                    <img src="img/2846378.jpg" alt="img">
+                    <h1>Título do artigo</h1>
+                </article>
+
+                <article class="w-2 h-2">
+                    <h2>Lorem Ipsum</h2>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae, hic reprehenderit, maiores
+                        obcaecati natus, porro quibusdam saepe rerum quidem dolorem numquam quos necessitatibus iste
+                        officiis ut est. At, explicabo suscipit.</p>
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Velit, tempore! Fugiat dicta, laborum
+                        tempore unde harum similique maiores praesentium eveniet, fuga possimus quae tenetur vero
+                        facilis obcaecati eum! Asperiores, beatae.</p>
+                    <h2>Lorem Ipsum</h2>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                </article>
+
+
+                <article class="w-2 h-1">
+                    <img src="img/4025565.jpg" alt="img" title="img" />
+                    <h1> Título do artigo</h1>
+                </article>
+
+                <article class="w-2 h-2">
+                    <p class="text-gallery">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam dolorum
+                        nemo modi vero, obcaecati cum voluptatum cumque illo nobis. Labore, doloribus! Sequi consequatur
+                        veritatis itaque, maiores nesciunt illo nostrum. Magnam!</p>
+                    <img src="img/4025565.jpg" alt="img" title="img" />
+                    <h1>Título do artigo</h1>
+                </article>
+
+                <article class="w-1 h-1">
+                    <img src="img/2846378.jpg" alt="img" title="img" />
+                    <h1>Título do artigo</h1>
+                </article>
+
+                <article class="w-1 h-1">
+                    <img src="img/2841901.jpg" alt="img" title="img" />
+                    <h1>Título do artigo</h1>
+                </article>
+
+                <article class="w-2 h-1">
+                    <h2>Lorem Ipsum</h2>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam voluptates, vitae atque, rerum
+                        facere qui tempora doloremque voluptas, nobis harum corrupti sed expedita. Eos enim quos quam,
+                        at delectus sequi?</p>
+                </article>
+
+                <article class="w-4 h-1">
+                    <h2>Lorem Ipsum</h2>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores, eveniet molestiae. Esse
+                        porro veritatis illum nobis ipsa asperiores adipisci amet alias, tenetur corrupti molestiae
+                        minima quis exercitationem obcaecati nemo omnis?</p>
+                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vitae labore eos fugiat, iusto odit sed
+                        odio et? Eius non eveniet voluptatibus corrupti alias, harum nemo necessitatibus beatae libero
+                        facere dolor?</p>
+                </article>
+
+            </section>
+        </section>
+        <section class="services">
+            <h1>Serviços</h1>
+            <div class="cards-serv">
+                <div class="card_services">
+                    <img src="./img/communication-ge3fff02e4_640.png" alt="">
+                    <h2>Atendimento ao Cliente</h2>
+                    <p>Tenha acesso a nossa plataforma de suporte ao cliente. Esclareça todas as suas dúvidas ou converse com um de nossos técnicos.</p>
+                </div>
+                <div class="card_services">
+                    <img src="./img/teaching-g437b2aaed_640.png" alt="">
+                    <h2>Agende seu treinamento</h2>
+                    <p>Agende seu treinamneto e da sua equipe. Escolha o(s) tema(s) e agende a data desejada.</p>
+                </div>
+                <div class="card_services">
+                    <img src="./img/businessmen-g6b9998cdd_640.png" alt="">
+                    <h2>Faça parte da nossa equipe</h2>
+                    <p>Venha fazer parte da nossa equipe. Envie seu currículo que entraremos em contato.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+</body>
+
+</html>
