@@ -10,8 +10,8 @@ import java.io.OutputStream;
 
 public class DaoList {
 
-    public int notaMedia(int nota1, int nota2) {
-        return (nota1 + nota2) / 2;
+    public static float notaMedia(int nota1, int nota2) {
+        return (nota1 + nota2) / 2.0f;
     }
 
     public void gravarArquivo(File f, int cod, String nome, int nota1, int nota2) {
@@ -22,8 +22,8 @@ public class DaoList {
                 d.writeInt(cod);
                 d.writeUTF(nome);
                 d.writeInt(nota1);
-                d.writeInt(nota2);  
-                d.writeInt(notaMedia(nota1, nota2));
+                d.writeInt(nota2);
+                d.writeFloat(notaMedia(nota1, nota2));
 
                 if(notaMedia(nota1, nota2) > 7) {
                     d.writeUTF("Aprovado");
@@ -45,22 +45,24 @@ public class DaoList {
             InputStream i = new FileInputStream(f);
             DataInputStream d = new DataInputStream(i);
             String nome, aprovacao;
-            int cod, nota1, nota2, notaMedia;
+            int cod, nota1, nota2;
+            float notaMedia;
             
             while (d.available() > 0) {
             cod = d.readInt();
             nome = d.readUTF();
             nota1 = d.readInt();
             nota2 = d.readInt();
-            notaMedia = d.readInt();
+            notaMedia = d.readFloat();
             aprovacao = d.readUTF();
     
-            sb.append("Código: " + cod)
+            sb.append("\nCódigo: " + cod)
                 .append("\nNome: " + nome)
                 .append("\nNota 1: " + nota1)
                 .append("\nNota 2: " + nota2)
-                .append("\nNota Média: " + notaMedia)
-                .append("\nAprovação: " + aprovacao);
+                .append(String.format("\nNota Média: %.1f", notaMedia))
+                .append("\nAprovação: " + aprovacao)
+                .append("\n");
             }
     
             d.close();
