@@ -224,7 +224,6 @@ html {
 }
 
 .card_services {
-    width: 25%;
     border-radius: 1rem;
     min-height: 360px;
     background-color: #ddebeb;
@@ -258,3 +257,83 @@ html {
 .card_services p {
     font-size: 1.1rem;
 }
+
+/* DEPLOIMENT */
+
+.depoiments > h1 {
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+.depoiments {
+    margin-top: 5rem;
+    margin-bottom: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.8rem;
+}
+
+.displayDepoiy {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 2rem;
+    margin: 1rem;
+}
+
+.card_depoiments {
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    text-align: center;
+    width: 100%;
+}
+
+.card_depoiments > img {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background-color: #fff;
+}
+
+.card_depoiments p {
+    font-size: 0.9rem;
+}
+
+/*RODAPÉ */
+
+footer {
+    background-color: #343a40;
+    padding: 1rem;
+}
+
+.light {
+    display: flex;
+    justify-content: space-between;
+}
+
+footer h3 {
+    color: #7c7c7c;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.menu-footer p {
+    color: #eff8f2;
+    font-weight: bold;
+    flex-grow: 1;
+}
+
+.links-footer ul {
+    list-style: none;
+}
+
+.links-footer a {
+    color: #eff8f2;
+    font-weight: bold;
+    text-decoration: none;
+}
+
