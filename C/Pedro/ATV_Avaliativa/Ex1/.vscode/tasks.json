@@ -1,0 +1,25 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Compilar",
+      "type": "shell",
+      "command": "gcc",
+      "args": ["-o", "./output/program.exe", "./src/main.c", "./src/itemDequeEnc.c"],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "Compilar e Executar",
+      "type": "shell",
+      "command": "./output/program.exe",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "dependsOn": "Compilar"
+    },
+  ]
+}
