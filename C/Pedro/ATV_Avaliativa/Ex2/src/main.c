@@ -1,73 +1,30 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include "../include/itemListaDpEnc.h"
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#include "../include/itemListaEnc.h"
 
 int main()
 {
-    ListaDupl *ld;
-    int vazia, cheia, chave;
+    Lista *lst1 = criaListaVazia();
 
-    printf("Criando lista duplamente encadeada vazia.\n");
-    ld = criaListaDuplVazia();
+    insereOrdenado(lst1, 1, 18, "Jogo 1", "1", "1");
+    insereOrdenado(lst1, 2, 12, "2", " 2", "2");
+    insereOrdenado(lst1, 3, 16, "3", "3", "3");
+    insereOrdenado(lst1, 4, 17, "4", "4", "4");
 
-    vazia = verificaListaDuplVazia(ld);
-    printf("Lista vazia? %d\n", vazia);
+    printf("Primeiro Print de tudo!!\n\n");
+    imprimeLista(lst1);
 
-    printf("\nAdicionando o 1o item. \n");
-    chave = 1;
-    inserirInicio(ld, chave);
-    vazia = verificaListaDuplVazia(ld);
-    printf("Lista vazia? %d\n", vazia);
+    printf("\nBusca pelo nome!!\n");
+    buscaPorNome(lst1, "Jogo 1");
 
-    printf("\nAdicionando o 2o item. \n");
-    chave = 2;
-    inserirFinal(ld, chave);
+    char nome[10] = "2";
+    printf("\nRemovendo o jogo de nome '%s'!!\n", nome);
+    removeItemPorNome(lst1, nome);
+    printf("\nSucesso!\n");
 
-    printf("\nAdicionando o 3o item. \n");
-    chave = 3;
-    inserirMeio(ld, 1, chave);
-
-    printf("\nAdicionando o 4o item. \n");
-    chave = 4;
-    inserirFinal(ld, chave);
-
-    printf("\nAdicionando o 5o item. \n");
-    chave = 5;
-    inserirInicio(ld, chave);
-
-    printf("\nAdicionando o 6o item. \n");
-    chave = 6;
-    inserirInicio(ld, chave);
-
-    printf("\nItens da lista (Esq para Dir):");
-    imprimeEsqDir(ld);
-
-    printf("\nRemovendo item com chave = 6.");
-    removePorChave(ld, 6);
-
-    printf("\nItens da lista (Esq para Dir):");
-    imprimeEsqDir(ld);
-
-    printf("\nRemovendo item com chave = 3.");
-    removePorChave(ld, 3);
-
-    printf("\nItens da lista (Dir para Esq):");
-    imprimeDirEsq(ld);
-
-    liberaListaDupl(ld);
+    printf("\nSegundo Print de tudo!!\n\n");
+    imprimeLista(lst1);
 
     return 0;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

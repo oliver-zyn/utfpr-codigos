@@ -5,7 +5,7 @@
       "label": "Compilar",
       "type": "shell",
       "command": "gcc",
-      "args": ["-o", "./output/program.exe", "./src/main.c", "./src/itemListaDpEnc.c"],
+      "args": ["-o", "./output/program.exe", "./src/main.c", "./src/itemListaEnc.c"],
       "group": {
         "kind": "build",
         "isDefault": true
