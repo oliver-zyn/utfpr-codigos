@@ -164,7 +164,6 @@ void libera_Deque(Deque* dq)
 // EXERCICIOS :
 
 void porcentagemNot(Deque *dq) {
-    printf("Porcentagem Try\n");
     float totalNot = totalQtdNot(dq);
     float qtdE = numDeNotPorClass(dq, "Esportes");
     float qtdP = numDeNotPorClass(dq, "Politica");
@@ -192,8 +191,6 @@ void porcentagemNot(Deque *dq) {
 }
 
 void numNot(Deque *dq) {
-
-    printf("numNot Try\n");
     float qtdE = numDeNotPorClass(dq, "Esportes");
     float qtdP = numDeNotPorClass(dq, "Politica");
     float qtdC = numDeNotPorClass(dq, "Cultura");
@@ -216,7 +213,6 @@ float totalQtdNot(Deque *dq) {
 }
 
 float numDeNotPorClass(Deque *dq, char class[]) {
-    printf("num de %s\n", class);
     Celula *aux = dq->ini;
     float qtd = 0;
 
@@ -226,9 +222,10 @@ float numDeNotPorClass(Deque *dq, char class[]) {
     }
 
     while (aux != NULL) {
-        if(strcmp(aux->item.classificacao, class)) {
+        if(strcmp(aux->item.classificacao, class) == 0) {
             qtd++;
         }
+        aux = aux->prox;
     }
     return qtd;
 }

@@ -1,0 +1,6 @@
+
+Operacoes do cliente: 1
+Compra | corola | 3000.0
+
+Venda | palio | 4000.0
+

@@ -134,8 +134,8 @@ int main() {
             case 5: {
                 printf("Noticias:\n");
                 imprime_Deque(dq);
-                // porcentagemNot(dq);
-                // numNot(dq);
+                porcentagemNot(dq);
+                numNot(dq);
                 break;
             }
             case 6: {
