@@ -3,15 +3,13 @@
 #include <string.h>
 #include "../include/itemDequeEnc.h"
 
-enum Classificacoes {Cinema = 1, Ciencia = 2, Politica = 3};
-
 struct noticia {
     int chave;
-    int ano_publicacao;
+    int anoPublicacao;
     char manchete[100];
     char corpo[200];
     char autor[100];
-    enum Classificacoes classificacao;
+    char classificacao[50];
 };
 
 struct celula {
@@ -37,14 +35,14 @@ int verificaDequeVazia(Deque* dq) {
     return (dq->ini == NULL);
 }
 
-void insereFinal_Deque(Deque* dq, int chave, int ano_publicacao, char manchete[], char corpo[], char autor[], enum Classificacoes classificacao) {
+void insereFinal_Deque(Deque* dq, int chave, int anoPublicacao, char manchete[], char corpo[], char autor[], char classificacao[]) {
     Noticia novo;
     novo.chave = chave;
-    novo.ano_publicacao = ano_publicacao;
+    novo.anoPublicacao = anoPublicacao;
     strcpy(novo.manchete, manchete);
     strcpy(novo.corpo, corpo);
     strcpy(novo.autor, autor);
-    novo.classificacao = classificacao;
+    strcpy(novo.classificacao, classificacao);
 
     Celula *nova = malloc(sizeof(Celula));
     nova->noticia = novo;
@@ -59,14 +57,14 @@ void insereFinal_Deque(Deque* dq, int chave, int ano_publicacao, char manchete[]
     dq->fim = nova;
 }
 
-void insereInicio_Deque(Deque* dq, int chave, int ano_publicacao, char manchete[], char corpo[], char autor[], enum Classificacoes classificacao) {
+void insereInicio_Deque(Deque* dq, int chave, int anoPublicacao, char manchete[], char corpo[], char autor[], char classificacao[]) {
     Noticia novo;
     novo.chave = chave;
-    novo.ano_publicacao = ano_publicacao;
+    novo.anoPublicacao = anoPublicacao;
     strcpy(novo.manchete, manchete);
     strcpy(novo.corpo, corpo);
     strcpy(novo.autor, autor);
-    novo.classificacao = classificacao;
+    strcpy(novo.classificacao, classificacao);
 
     Celula *nova = malloc(sizeof(Celula));
     nova->noticia = novo;
@@ -115,25 +113,15 @@ int removeFinal_Deque(Deque* dq) {
     free(remover);
 }
 
-char retNomeClassificacao(enum Classificacoes classificacao) {
-    if (classificacao == Cinema) {
-        return "Futebol";
-    } else if (classificacao = Ciencia) {
-        return "Ciencia";
-    } else {
-        return "Politica";
-    }
-}
-
 void imprime_Deque(Deque* dq) {
     Celula *aux = dq->ini;
     while (aux != NULL) {
-        printf("Chave: %d\n", aux->noticia.chave);
-        printf("Ano de publicacao: %d\n", aux->noticia.ano_publicacao);
+        printf("\nCodigo: %d\n", aux->noticia.chave);
+        printf("Ano de publicacao: %d\n", aux->noticia.anoPublicacao);
         printf("Manchete: %s\n", aux->noticia.manchete);
         printf("Corpo: %s\n", aux->noticia.corpo);
         printf("Autor: %s\n", aux->noticia.autor);
-        printf("Classificacao: %s\n", retNomeClassificacao(aux->noticia.classificacao));
+        printf("Classificacao: %s\n", aux->noticia.classificacao);
         aux = aux->prox;
     }
 }
@@ -149,7 +137,7 @@ void libera_Deque(Deque* dq) {
     free(dq);
 }
 
-int numeroNoticiasClassificacao(Deque * dq, enum Classificacoes classificacao) {
+int numeroNoticiasClassificacao(Deque * dq, char classificacao[]) {
     Celula *aux = dq->ini;
     int count = 0;
 
@@ -162,37 +150,43 @@ int numeroNoticiasClassificacao(Deque * dq, enum Classificacoes classificacao) {
         if (strcmp(aux->noticia.classificacao, classificacao) == 0) {
             count++;
         }
+
+        aux = aux->prox;
     }
 
     return count;
 }
 
 void imprimePorcentagemClassificacaoMaior(Deque * dq) {
-    float totalNoticias = numeroTotalNoticias(dq);
-    int countCinema = numeroNoticiasClassificacao(dq, Cinema);
-    int countCiencia = numeroNoticiasClassificacao(dq, Ciencia);
-    int countPolitica = numeroNoticiasClassificacao(dq, Politica);
-    float percentualCinema = ((countCinema / totalNoticias) * 100);
-    float percentualCiencia = ((countCiencia / totalNoticias) * 100);
-    float percentualPolitica = ((countPolitica / totalNoticias) * 100);
+    float qtdTotalNoticias = numeroTotalNoticias(dq);
+    int qtdCinema = numeroNoticiasClassificacao(dq, "Cinema");
+    int qtdCiencia = numeroNoticiasClassificacao(dq, "Ciencia");
+    int qtdPolitica = numeroNoticiasClassificacao(dq, "Politica");
 
-    float maiorPercentual = percentualCinema;
+    float classificacaoMaiorQtd = qtdCinema;
 
-    if (percentualCiencia > maiorPercentual) {
-        maiorPercentual = percentualCiencia;
+    if (qtdCiencia > classificacaoMaiorQtd) {
+        classificacaoMaiorQtd = qtdCiencia;
     }
-    if (percentualPolitica > maiorPercentual) {
-        maiorPercentual = percentualPolitica;
+    if (qtdPolitica > classificacaoMaiorQtd) {
+        classificacaoMaiorQtd = qtdPolitica;
     }
 
-    if (percentualCinema == maiorPercentual) {
+    printf("\nPorcentagem referente a classificacao com maior numero de noticias\n");
+    if (qtdCinema == classificacaoMaiorQtd) {
+        float percentualCinema = ((qtdCinema / qtdTotalNoticias) * 100);
         printf("Cinema: %.2f%%\n", percentualCinema);
+        return;
     }
-    if (percentualCiencia == maiorPercentual) {
-        printf("Ciência: %.2f%%\n", percentualCiencia);
+    if (qtdCiencia == classificacaoMaiorQtd) {
+        float percentualCiencia = ((qtdCiencia / qtdTotalNoticias) * 100);
+        printf("Ciencia: %.2f%%\n", percentualCiencia);
+        return;
     }
-    if (percentualPolitica == maiorPercentual) {
-        printf("Política: %.2f%%\n", percentualPolitica);
+    if (qtdPolitica == classificacaoMaiorQtd) {
+        float percentualPolitica = ((qtdPolitica / qtdTotalNoticias) * 100);
+        printf("Politica: %.2f%%\n", percentualPolitica);
+        return;
     }
    
 }
@@ -208,7 +202,16 @@ int numeroTotalNoticias(Deque * dq) {
 
     while (aux != NULL) {
         count++;
+
+        aux = aux->prox;
     }
 
     return count;
+}
+
+void imprimeNumeroNoticiasClassificacao(Deque *dq) {
+    printf("\nQuantidade de noticias por classsificacao: \n");
+    printf("\nCinema: %d", numeroNoticiasClassificacao(dq, "Cinema"));
+    printf("\nCiencia: %d", numeroNoticiasClassificacao(dq, "Ciencia"));
+    printf("\nPolitica: %d\n", numeroNoticiasClassificacao(dq, "Politica"));
 }
