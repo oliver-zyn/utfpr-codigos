@@ -1,57 +1,122 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "../include/itemDequeEnc.h"
 
+int exibeMenuUsuario() {
+    int opcao = 0;
+
+    printf("\nMenu:\n");
+    printf("1. Inserir noticia no inicio\n");
+    printf("2. Inserir noticia no final\n");
+    printf("3. Remover noticia do final\n");
+    printf("4. Remover noticia do inicio\n");
+    printf("5. Imprimir noticias\n");
+    printf("6. Imprimir a quantidade de noticias cadastradas por classificacao \n");
+    printf("7. Sair\n");
+    printf("Escolha uma opcao: ");
+    scanf("%d", &opcao);
+
+    return opcao;
+}
+
+char* retNomeClassificacao(int classificacao) {
+    switch (classificacao) {
+        case 1:
+            return "Cinema";
+        case 2:
+            return "Ciencia";
+        case 3:
+            return "Politica";
+        default:
+            return "";
+    }
+}
+
+void cadastraNoticia(Deque *dq, int inserirInicio) {
+    int cod, anoPublicacao, opcaoClassificacao;
+    char manchete[100], corpo[500], autor[100];
+    char * classificacao;
+
+    printf("Digite o codigo da noticia: ");
+    scanf("%d", &cod);
+    fflush(stdin);
+
+    printf("Digite a manchete da noticia: ");
+    gets(manchete);
+    fflush(stdin);
+
+    printf("Digite o corpo da noticia: ");
+    gets(corpo);
+    fflush(stdin);
+
+    printf("Digite o autor da noticia: ");
+    gets(autor);
+    fflush(stdin);
+
+    printf("Digite o ano de publicacao da noticia: ");
+    scanf("%d", &anoPublicacao);
+    fflush(stdin);
+
+    printf("Selecione a classificacao da noticia: ");
+    printf("\n1 - Cinema");
+    printf("\n2 - Ciencia");
+    printf("\n3 - Politica");
+    printf("\nOpcao: ");
+    scanf("%d", &opcaoClassificacao);
+
+    classificacao = retNomeClassificacao(opcaoClassificacao);
+
+    if (strcmp(classificacao, "") == 0) {
+        printf("\nClassificacao invalida!\n");
+        return;
+    }
+
+    if (inserirInicio == 1) {
+        insereInicio_Deque(dq, cod, anoPublicacao, manchete, corpo, autor, classificacao);
+    } else {
+        insereFinal_Deque(dq, cod, anoPublicacao, manchete, corpo, autor, classificacao);
+    }
+
+    printf("\nNoticia inserida com sucesso!\n");
+}
+
 int main() {
-    Deque *dq = criarJornal();
+    Deque *dq = cria_Deque();
     int opcao = 0;
 
     do {
         opcao = exibeMenuUsuario();
         
         switch (opcao) {
-            case 1: {
-                int cod;
-                char titulo[100], conteudo[500], classificacao[50];
-                printf("Digite o codigo da noticia: ");
-                scanf("%d", &cod);
-                printf("Digite o título da notícia: ");
-                scanf(" %[^\n]", titulo);
-                printf("Digite o conteúdo da notícia: ");
-                scanf(" %[^\n]", conteudo);
-                printf("Digite a classificação da notícia: ");
-                scanf(" %[^\n]", classificacao);
-                insereFinal_Deque(dq, criarNoticia(cod, titulo, conteudo, classificacao));
-                printf("Notícia inserida com sucesso!\n");
+            case 1:
+                cadastraNoticia(dq, 0);
                 break;
-            }
             case 2:
-                removerPrimeiraNoticia(dq);
-                printf("Primeira notícia removida!\n");
+                cadastraNoticia(dq, 1);
                 break;
             case 3:
-                removerUltimaNoticia(dq);
-                printf("Última notícia removida!\n");
+                removeFinal_Deque(dq);
+                printf("\nNoticia removida do final com sucesso!\n");
                 break;
             case 4:
-                imprimirJornal(dq);
+                removeInicio_Deque(dq);
+                printf("\nNoticia removida do inicio com sucesso!\n");
                 break;
             case 5:
-                calcularQuantidadePorClassificacao(dq);
+                printf("\nNoticias cadastradas: \n");
+                imprime_Deque(dq);
                 break;
             case 6: {
-                char nomeClassificacao[50];
-                printf("Digite o nome da nova classificação: ");
-                scanf(" %[^\n]", nomeClassificacao);
-                adicionarClassificacao(jornal, nomeClassificacao);
-                printf("Classificação adicionada com sucesso!\n");
+                imprimePorcentagemClassificacaoMaior(dq);
+                imprimeNumeroNoticiasClassificacao(dq);
                 break;
             }
             case 7:
-                printf("Saindo...\n");
+                printf("\nSaindo...\n");
                 break;
             default:
-                printf("Opção inválida!\n");
+                printf("\nOpcao invalida!\n");
         }
     } while (opcao != 7);
 
@@ -60,20 +125,4 @@ int main() {
     return 0;
 }
 
-int exibeMenuUsuario() {
-    int opcao = 0;
 
-    printf("Menu:\n");
-    printf("1. Inserir notícia no inicio\n");
-    printf("1. Inserir notícia no final\n");
-    printf("2. Remover primeira notícia\n");
-    printf("3. Remover ultima notícia\n");
-    printf("4. Imprimir jornal\n");
-    printf("5. Calcular quantidade por classificação\n");
-    printf("6. Adicionar classificação\n");
-    printf("7. Sair\n");
-    printf("Escolha uma opção: ");
-    scanf("%d", &opcao);
-
-    return opcao;
-}

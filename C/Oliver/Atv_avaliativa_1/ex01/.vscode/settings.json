@@ -1,5 +1,8 @@
 {
   "files.associations": {
-    "itemfilaenc.h": "c"
+    "itemfilaenc.h": "c",
+    "itemdequeenc.h": "c",
+    "stdlib.h": "c",
+    "string.h": "c"
   }
 }

@@ -1,0 +1,257 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+  --dark-gray: #343a40;
+  --light-gray: #f1f0f0;
+  --gray: #d4d4d4;
+  --white: #fff;
+  
+  --purple-transparent: rgba(147, 54, 68, 0.842);
+  --dark-blue-transparent: rgba(14, 11, 108, 0.842);
+  --dark-green-transparent: rgba(10, 76, 32, 0.842);
+  --dark-orange-transparent: rgba(214, 96, 12, 0.842);
+
+  --light-blue: #037ef8;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+}
+
+body, input, textarea, button {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* diminui um pouco o tamanho da fonte em telas menores, facilitando a responsividade ao usar o rem */
+@media (max-width: 900px) {
+  html {
+      font-size: 87.5%;
+  }
+}
+
+/* CABEÇALHO */
+
+header {
+  background: var(--dark-gray);
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: fixed;
+  z-index: 5;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 80px;
+  max-height: 80px;
+  padding: 0 2rem;
+}
+
+.logo-header {
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+
+nav > ul {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  gap: 2.3rem;
+}
+
+nav a {
+  color: var(--white);
+}
+
+/* MENU LATERAL */
+
+.sidebar {
+  background: var(--light-gray);
+  position: fixed;
+  left: 0;
+  top: 80px;
+  min-width: 240px;
+  max-width: 240px;
+  height: 100%;
+  padding-top: 1rem;
+  z-index: 4;
+}
+
+.sidebar > ul {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  color: var(--dark-gray);
+}
+
+.sidebar li {
+  padding: 1rem 0 1rem 1rem;
+  cursor: pointer;
+  transition: background 150ms ease;
+}
+
+.sidebar li:hover {
+  background: var(--gray);
+}
+
+.sidebar a {
+  color: var(--dark-gray);
+}
+
+/* CARDS */
+
+main {
+  margin: 80px 0 0 240px;
+  padding: 1rem;
+}
+
+.title-main {
+  font-weight: 500;
+}
+
+.cards-main {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 1.5rem;
+}
+
+.card-purple {
+  background: var(--purple-transparent);
+}
+
+.card-blue {
+  background: var(--dark-blue-transparent);
+}
+
+.card-green {
+  background: var(--dark-green-transparent);
+}
+
+.card-orange {
+  background: var(--dark-orange-transparent);
+}
+
+.card {
+  height: 25vh;
+  position: relative;
+  border-radius: 0.75rem;
+}
+
+.card > i {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  font-size: 5rem;
+  opacity: 0.1;
+}
+
+.card > h1 {
+  font-weight: 600;
+}
+
+.card > h1, .card > p {
+  padding: 0.25rem 1rem;
+}
+
+.footer-card {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  border-radius: 0 0 0.75rem 0.75rem;
+  padding: 0.2rem 0;
+}
+
+.footer-card > a {
+  font-size: 0.8rem;
+  color: var(--white);
+  opacity: 0.4;
+}
+
+.footer-card > a:hover {
+  opacity: 1;
+}
+
+/* BOTÕES */
+
+.buttons {
+  display: grid;
+  /* grid-template-columns: repeat(3, 1fr); */
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  background: var(--white);
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.116);
+}
+
+.text-button {
+  width: 100%;
+  text-align: center;
+}
+
+.text-button > a {
+  text-transform: uppercase;
+  color: var(--dark-gray);
+}
+
+.icon-button {
+  background: var(--light-blue);
+  color: var(--white);
+  min-width: 5.3rem;
+  min-height: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-button > i {
+  font-size: 2.3rem;
+}
+
+/* RESPONSIVIDADE */
+
+@media (max-width: 900px) {
+  .sidebar {
+    top: 80px;
+    min-width: 100%;
+    max-width: 100%;
+    min-height: 130px;
+    max-height: 130px;
+    padding-top: 0;
+  }
+  
+  .sidebar > ul {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    flex-wrap: wrap;
+  }
+  
+  .sidebar li {
+    padding: 1rem 1.5rem;
+    border-radius: 0.5rem;
+  }
+
+  main {
+    margin: 210px 0 0 0;
+  }
+}
