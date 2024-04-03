@@ -1,0 +1,289 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --white: rgba(255,255,255,1);
+    --dark: rgb(52, 58, 64);
+    --sidewhite: rgb(241, 240, 240);
+
+    --vermillion: rgba(147, 54, 68,0.85);
+    --greener: rgba(10, 76, 32,0.85);
+    --blue: rgba(14, 11, 108,0.85);
+    --amerion: rgba(214, 95, 12,0.85);
+}
+
+body {
+    color: var(--white);
+    font-family: "Montserrat";
+}
+
+/* Menu SUPERIOR */
+
+header {
+    width: 100%;
+    display: flex;
+    background: var(--dark);
+    min-height: 80px;
+    max-height: 80px;
+    position: fixed;
+    z-index: 5;
+    top: 0;
+}
+
+header h1 {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    font-size: 1.2rem;
+    padding: 0 2rem;
+    font-weight: 400;
+}
+
+header nav {
+    flex-grow: 1;
+}
+
+header ul {
+    display: flex;
+    flex-direction: row;
+    min-height: 80px;
+    max-height: 80px;
+    gap: 2rem;
+    list-style: none;
+    justify-content: right;
+    align-items: center;
+    padding: 0 4rem;
+}
+
+header i{
+    color: var(--white);
+}
+
+/* MENU LATERAL */
+
+#sidebar {
+    position: absolute;
+    z-index: 3;
+    left: 0;
+    top: 80px;
+    height: 100%;
+    min-width: 240px;
+    max-width: 240px;
+    background-color: var(--sidewhite);
+}
+
+#sidebar ul {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 12px;
+}
+
+#sidebar a {
+    text-decoration: none;
+    color: black;
+}
+
+#sidebar i {
+    text-align: center;
+    min-width: 24px;
+    max-width: 24px;
+}
+
+#sidebar span {
+    font-weight: 300;
+    font-size: 14px;
+}
+
+/* CONTEUDO PRINCIPAL */
+
+main {
+    color: #000;
+    background-color: #faf8f8;
+    margin-top: 96px;
+    margin-left: 256px;
+    margin-right: 16px;
+    padding-top: 0.1rem;
+    border-radius: 0.55rem;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+}
+
+.cards div {
+    position: relative;
+    border-radius: 0.55rem;
+    height: 25vh;
+}
+
+.cards div p {
+    padding: 0 .8rem;
+    font-weight: 400;
+}
+
+.cards div h1 {
+    padding: 0 .8rem;
+    font-weight: 500;
+}
+
+.cards div i {
+    font-size: 5rem;
+    position: absolute;
+    right: 1rem;
+    bottom: 1rem;
+    opacity: 0.1;
+}
+
+.verm {
+    background-color: var(--vermillion);
+}
+
+.green {
+    background-color: var(--greener);
+}
+
+.amare {
+    background-color: var(--amerion);
+}
+
+.blue {
+    background-color: var(--blue);
+}
+
+.cards a {
+    color: rgba(255,255,255,0.5);
+    opacity: 0.6;
+    text-decoration: none;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 1.5rem;
+    z-index: 1;
+    font-size: 14px;
+    border-bottom-left-radius: 0.55rem;
+    border-bottom-right-radius: 0.55rem;
+    text-align: center;
+    padding-top: 0.2rem;
+    transition: all 0.2s;
+}
+
+.verm a {
+    background-color: var(--vermillion);
+    opacity: 0.95;
+}
+
+.green a {
+    background-color: var(--greener);
+    opacity: 0.95;
+}
+
+.amare a {
+    background-color: var(--amerion);
+    opacity: 0.95;
+}
+
+.blue a {
+    background-color: var(--blue);
+    opacity: 0.95;
+}
+
+.cards a:hover {
+    color: rgba(255,255,255,1);
+}
+
+main h1 {
+    font-weight: 400;
+}
+
+/* BOTOES */
+
+.botoes {
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 2fr));
+    gap: 1rem;
+}
+
+.botoes div {
+    position: relative;
+    display: flex;
+    width: 100%;
+    background-color: var(--white);
+    justify-content: center;
+    align-items: center;
+    min-height: 80px;
+}
+
+.botoes i {
+    position: absolute;
+    color: var(--white);
+    background-color: #037ef8;
+    font-size: 2rem;
+    padding: .5rem, 0 , 1rem, 0;
+    height: 100%;
+    min-width: 5rem;
+    left: 0;
+    text-align: center;
+    padding-top: 1.5rem;
+}
+
+.botoes a {
+    margin-left: 5rem;
+    width: 100%;
+    height: 100%;
+    color: var(--dark);
+    text-decoration: none;
+    text-align: center;
+    padding-top: 1.7rem;
+}
+
+@media(min-width : 788){
+
+    #sidebar {
+        position: absolute;
+        z-index: 3;
+        left: 0;
+        top: 80px;
+        height: 100%;
+        min-width: 55px;
+        max-width: 55px;
+        background-color: var(--sidewhite);
+    }
+
+    #sidebar ul {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        padding: 12px;
+    }
+
+    #sidebar a {
+        text-decoration: none;
+        color: black;
+    }
+
+    #sidebar i {
+        text-align: center;
+        min-width: 1.875rem;
+        max-width: 1.875rem;
+    }
+
+    #sidebar span {
+        font-weight: 300;
+        font-size: .875rem;
+        display: none;
+    }
+
+    main {
+        margin-left: 4.4375rem;
+    }
+}
