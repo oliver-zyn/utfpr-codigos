@@ -163,72 +163,7 @@ void libera_Deque(Deque* dq)
 
 // EXERCICIOS :
 
-void porcentagemNot(Deque *dq) {
-    float totalNot = totalQtdNot(dq);
-    float qtdE = numDeNotPorClass(dq, "Esportes");
-    float qtdP = numDeNotPorClass(dq, "Politica");
-    float qtdC = numDeNotPorClass(dq, "Cultura");
 
-    float maiorQtd = qtdE;
-    if(qtdC > maiorQtd) {
-        maiorQtd = qtdC;
-    }
-    if(qtdP > maiorQtd) {
-        maiorQtd = qtdP;
-    }
-
-    printf("Porcentagem da classificacao mais frequente: \n");
-    if(qtdE == maiorQtd) {
-        printf("\nEsportes: %.1f%%\n", (qtdE / totalNot) * 100);
-    }
-    if(qtdP == maiorQtd) {
-        printf("\nPolitica: %.1f%%\n", (qtdP / totalNot) * 100);
-    }
-    if(qtdC == maiorQtd) {
-        printf("\nCultura: %.1f%%\n", (qtdC / totalNot) * 100);
-    }
-
-}
-
-void numNot(Deque *dq) {
-    float qtdE = numDeNotPorClass(dq, "Esportes");
-    float qtdP = numDeNotPorClass(dq, "Politica");
-    float qtdC = numDeNotPorClass(dq, "Cultura");
-
-    printf("\nQuantidade de noticias de Esportes: %.0f\n", qtdE);
-    printf("Quantidade de noticias de Politica: %.0f\n", qtdP);
-    printf("Quantidade de noticias de Cultura: %.0f\n", qtdC);
-
-}
-
-float totalQtdNot(Deque *dq) {
-    float totalNot = 0;
-    Celula *aux = dq->ini;
-
-    while(aux != NULL) {
-        totalNot += 1;
-        aux = aux->prox;
-    }
-    return totalNot;
-}
-
-float numDeNotPorClass(Deque *dq, char class[]) {
-    Celula *aux = dq->ini;
-    float qtd = 0;
-
-    if (verificaDequeVazia(dq)) {
-        printf("Erro: Deque vazia!\n");
-        return -1;
-    }
-
-    while (aux != NULL) {
-        if(strcmp(aux->item.classificacao, class) == 0) {
-            qtd++;
-        }
-        aux = aux->prox;
-    }
-    return qtd;
-}
 
 
 

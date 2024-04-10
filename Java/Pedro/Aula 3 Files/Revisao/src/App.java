@@ -43,8 +43,6 @@ public class App {
             }
         } catch (Exception ex) {
             System.out.println("Deu problema no arquivo!");
-        }
-
-        
+        }        
     }
 }
