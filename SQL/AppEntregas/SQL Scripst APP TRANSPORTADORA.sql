@@ -57,7 +57,7 @@ CREATE TABLE PACOTES (
 CREATE TABLE PACOTESSITUACOES (
 	pacote_situacao_id INT IDENTITY(1,1) CONSTRAINT pk_pct_sit PRIMARY KEY NOT NULL,
 	pacote_id INT CONSTRAINT fk_pacote_id_SIT FOREIGN KEY REFERENCES PACOTES(pacote_id) NOT NULL,
-	situacao_anterior_id INT CONSTRAINT fk_sitAnt_id FOREIGN KEY REFERENCES SITUACOES(situacao_id) NOT NULL,
+	situacao_anterior_id INT CONSTRAINT fk_sitAnt_id FOREIGN KEY REFERENCES SITUACOES(situacao_id),
 	situacao_atual_id INT CONSTRAINT fk_sitAtu_id FOREIGN KEY REFERENCES SITUACOES(situacao_id) NOT NULL,
 	data_alteracao DATETIME NOT NULL,
 );
@@ -102,9 +102,9 @@ VALUES
 -- Inserts para SITUACOES
 INSERT INTO SITUACOES (desccricao)
 VALUES 
+('Aguardando'),
 ('Entregue'),
 ('Devolvido'),
-('Pendente'),
 ('Extraviado');
 
 -- Inserts para DESTINATARIOS
@@ -128,11 +128,11 @@ VALUES
 -- Inserts para PACOTESSITUACOES
 INSERT INTO PACOTESSITUACOES (pacote_id, situacao_anterior_id, situacao_atual_id, data_alteracao)
 VALUES 
+(1, NULL, 1, GETDATE()),
 (1, 1, 2, GETDATE()),
-(2, 1, 2, GETDATE()),
-(3, 1, 2, GETDATE()),
-(4, 1, 2, GETDATE()),
-(5, 1, 2, GETDATE());
+(2, 1, 3, GETDATE()),
+(3, 1, 4, GETDATE()),
+(2, 3, 1, GETDATE());
 
 -- Inserts para ENTREGADORES
 INSERT INTO ENTREGADORES (usuario_id, cpf, nome, telefone, foto_perfil)
@@ -146,9 +146,32 @@ VALUES
 -- Inserts para PACOTESENTREGADORES
 INSERT INTO PACOTESENTREGADORES (pacote_id, entregador_anterior_id, entregador_atual_id, data_alteracao)
 VALUES 
+(1, NULL, 1, GETDATE()),
 (1, 1, 2, GETDATE()),
-(2, 1, 2, GETDATE()),
-(3, 1, 2, GETDATE()),
-(4, 1, 2, GETDATE()),
-(5, 1, 2, GETDATE());
+(2, NULL, 4, GETDATE()),
+(2, 4, 5, GETDATE()),
+(3, NULL, 3, GETDATE());
 
+-- Select para TRANSPORTADORA
+SELECT * FROM TRANSPORTADORA;
+
+-- Select para USUARIOS
+SELECT * FROM USUARIOS;
+
+-- Select para SITUACOES
+SELECT * FROM SITUACOES;
+
+-- Select para DESTINATARIOS
+SELECT * FROM DESTINATARIOS;
+
+-- Select para PACOTES
+SELECT * FROM PACOTES;
+
+-- Select para PACOTESSITUACOES
+SELECT * FROM PACOTESSITUACOES;
+
+-- Select para ENTREGADORES
+SELECT * FROM ENTREGADORES;
+
+-- Select para PACOTESENTREGADORES
+SELECT * FROM PACOTESENTREGADORES;
