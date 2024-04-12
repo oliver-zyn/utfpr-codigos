@@ -3,8 +3,8 @@ go
 
 -- EXCLUSAO
 
-DROP TABLE IF EXISTS PACOTESENTREGADORES;
-DROP TABLE IF EXISTS PACOTESSITUACOES;
+DROP TABLE IF EXISTS PACOTES_ENTREGADORES;
+DROP TABLE IF EXISTS PACOTES_SITUACOES;
 DROP TABLE IF EXISTS PACOTES;
 DROP TABLE IF EXISTS ENTREGADORES;
 DROP TABLE IF EXISTS DESTINATARIOS;
@@ -31,7 +31,7 @@ CREATE TABLE USUARIOS (
 
 CREATE TABLE SITUACOES (
 	situacao_id INT IDENTITY(1,1) CONSTRAINT pk_situacoes PRIMARY KEY NOT NULL,
-	desccricao VARCHAR(10) NOT NULL, 
+	descricao VARCHAR(10) NOT NULL, 
 );
 
 CREATE TABLE DESTINATARIOS (
@@ -54,7 +54,7 @@ CREATE TABLE PACOTES (
 	foto_pacote BINARY,
 );
 
-CREATE TABLE PACOTESSITUACOES (
+CREATE TABLE PACOTES_SITUACOES (
 	pacote_situacao_id INT IDENTITY(1,1) CONSTRAINT pk_pct_sit PRIMARY KEY NOT NULL,
 	pacote_id INT CONSTRAINT fk_pacote_id_SIT FOREIGN KEY REFERENCES PACOTES(pacote_id) NOT NULL,
 	situacao_anterior_id INT CONSTRAINT fk_sitAnt_id FOREIGN KEY REFERENCES SITUACOES(situacao_id),
@@ -71,11 +71,11 @@ CREATE TABLE ENTREGADORES (
 	foto_perfil BINARY,
 );
 
-CREATE TABLE PACOTESENTREGADORES (
+CREATE TABLE PACOTES_ENTREGADORES (
 	pacote_entregador_id INT IDENTITY(1,1) CONSTRAINT pk_pct_entg PRIMARY KEY NOT NULL,
 	pacote_id INT CONSTRAINT fk_pacote_id_ENTG FOREIGN KEY REFERENCES PACOTES(pacote_id) NOT NULL,
-	entregador_anterior_id INT CONSTRAINT fk_entgAnt_id FOREIGN KEY REFERENCES SITUACOES(situacao_id) NOT NULL,
-	entregador_atual_id INT CONSTRAINT fk_entgAtu_id FOREIGN KEY REFERENCES SITUACOES(situacao_id) NOT NULL,
+	entregador_anterior_id INT CONSTRAINT fk_entgAnt_id FOREIGN KEY REFERENCES ENTREGADORES(entregador_id) NOT NULL,
+	entregador_atual_id INT CONSTRAINT fk_entgAtu_id FOREIGN KEY REFERENCES ENTREGADORES(entregador_id) NOT NULL,
 	data_alteracao DATETIME NOT NULL,
 );
 
@@ -100,7 +100,7 @@ VALUES
 (56789012344, 'senha112', 0);
 
 -- Inserts para SITUACOES
-INSERT INTO SITUACOES (desccricao)
+INSERT INTO SITUACOES (descricao)
 VALUES 
 ('Aguardando'),
 ('Entregue'),
@@ -126,7 +126,7 @@ VALUES
 (5, 567890, 56789012344, NULL);
 
 -- Inserts para PACOTESSITUACOES
-INSERT INTO PACOTESSITUACOES (pacote_id, situacao_anterior_id, situacao_atual_id, data_alteracao)
+INSERT INTO PACOTES_SITUACOES (pacote_id, situacao_anterior_id, situacao_atual_id, data_alteracao)
 VALUES 
 (1, NULL, 1, GETDATE()),
 (1, 1, 2, GETDATE()),
@@ -144,7 +144,7 @@ VALUES
 (5, 56789012344, 'Entregador E', '555678901234', NULL);
 
 -- Inserts para PACOTESENTREGADORES
-INSERT INTO PACOTESENTREGADORES (pacote_id, entregador_anterior_id, entregador_atual_id, data_alteracao)
+INSERT INTO PACOTES_ENTREGADORES (pacote_id, entregador_anterior_id, entregador_atual_id, data_alteracao)
 VALUES 
 (1, NULL, 1, GETDATE()),
 (1, 1, 2, GETDATE()),
