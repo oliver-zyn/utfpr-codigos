@@ -1,0 +1,9 @@
+{
+    "java.project.sourcePaths": [
+        "src"
+    ],
+    "java.project.outputPath": "bin",
+    "java.project.referencedLibraries": [
+        "c:\\Users\\olive\\Documents\\Faculdade\\utfpr-codigos\\Java\\Oliver\\postgresql-42.7.3.jar"
+    ]
+}
