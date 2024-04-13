@@ -1,4 +1,6 @@
-USE Transportapp;
+CREATE DATABASE TransportApp;
+go
+USE TransportApp;
 go
 
 -- EXCLUSAO
@@ -15,83 +17,83 @@ DROP TABLE IF EXISTS TRANSPORTADORA;
 -- CREATES
 
 CREATE TABLE TRANSPORTADORA (
-	cnpj BIGINT IDENTITY(1,1) CONSTRAINT pk_Transport PRIMARY KEY NOT NULL,
-	nome VARCHAR(100) NOT NULL,
-	razao_social VARCHAR(100) NOT NULL,
-	cep BIGINT NOT NULL,
-	telefone VARCHAR(20) NOT NULL
+	cnpj BIGINT CONSTRAINT pk_transportadora PRIMARY KEY,
+	nome VARCHAR(100) CONSTRAINT nn_nome_transportadora NOT NULL,
+	razao_social VARCHAR(100) CONSTRAINT nn_razao_social NOT NULL,
+	cep BIGINT CONSTRAINT nn_cep_transportadora NOT NULL,
+	telefone VARCHAR(20) CONSTRAINT nn_telefone NOT NULL
 );
 
 CREATE TABLE USUARIOS (
-	usuario_id INT IDENTITY(1,1) CONSTRAINT pk_usuario PRIMARY KEY NOT NULL,
-	cpf BIGINT NOT NULL UNIQUE,
-	senha VARCHAR(100) NOT NULL,
-	admin_Us TINYINT NOT NULL,
+	usuario_id INT IDENTITY(1,1) CONSTRAINT pk_usuarios PRIMARY KEY,
+	cpf BIGINT CONSTRAINT nn_cpf_usuarios NOT NULL UNIQUE,
+	senha VARCHAR(100) CONSTRAINT nn_senha_usuarios NOT NULL,
+	usuario_admin TINYINT CONSTRAINT nn_usuario_admin NOT NULL,
 );
 
 CREATE TABLE SITUACOES (
-	situacao_id INT IDENTITY(1,1) CONSTRAINT pk_situacoes PRIMARY KEY NOT NULL,
-	descricao VARCHAR(10) NOT NULL, 
+	situacao_id INT IDENTITY(1,1) CONSTRAINT pk_situacoes PRIMARY KEY,
+	descricao VARCHAR(10) CONSTRAINT nn_descricao NOT NULL, 
 );
 
 CREATE TABLE DESTINATARIOS (
-	destinatario_id INT IDENTITY(1,1) CONSTRAINT pk_dest PRIMARY KEY NOT NULL,
-	nome VARCHAR(100) NOT NULL,
-	cpf BIGINT NOT NULL UNIQUE,
-	telefone VARCHAR(25) NOT NULL,
-	rua VARCHAR(100) NOT NULL,
-	bairro VARCHAR(100) NOT NULL,
-	numero INT NOT NULL,
-	complemento VARCHAR(50),
-	cep BIGINT NOT NULL,
+	destinatario_id INT IDENTITY(1,1) CONSTRAINT pk_destinatarios PRIMARY KEY,
+	nome VARCHAR(100) CONSTRAINT nn_nome_destinatarios NOT NULL,
+	cpf BIGINT CONSTRAINT nn_cpf_destinatarios NOT NULL UNIQUE,
+	telefone VARCHAR(25) CONSTRAINT nn_telefone_destinatarios NOT NULL,
+	rua VARCHAR(100) CONSTRAINT nn_rua_destinatarios NOT NULL,
+	bairro VARCHAR(100) CONSTRAINT nn_bairro_destinatarios NOT NULL,
+	numero INT CONSTRAINT nn_numero_destinatarios NOT NULL,
+	complemento VARCHAR(100),
+	cep BIGINT CONSTRAINT nn_cep_destinatarios NOT NULL,
 );
 
 CREATE TABLE PACOTES (
-	pacote_id INT IDENTITY(1,1) CONSTRAINT pk_pacotes PRIMARY KEY NOT NULL,
-	destinatario_id INT CONSTRAINT fk_dest_id FOREIGN KEY REFERENCES DESTINATARIOS(destinatario_id) NOT NULL,
-	numero_pedido INT NOT NULL,
+	pacote_id INT IDENTITY(1,1) CONSTRAINT pk_pacotes PRIMARY KEY,
+	destinatario_id INT CONSTRAINT fk_pac_destinatarios FOREIGN KEY REFERENCES DESTINATARIOS(destinatario_id) CONSTRAINT nn_destinatario_id NOT NULL,
+	numero_pedido INT CONSTRAINT nn_numero_pedido NOT NULL,
 	cpf_recebedor BIGINT,
 	foto_pacote BINARY,
 );
 
 CREATE TABLE PACOTES_SITUACOES (
-	pacote_situacao_id INT IDENTITY(1,1) CONSTRAINT pk_pct_sit PRIMARY KEY NOT NULL,
-	pacote_id INT CONSTRAINT fk_pacote_id_SIT FOREIGN KEY REFERENCES PACOTES(pacote_id) NOT NULL,
-	situacao_anterior_id INT CONSTRAINT fk_sitAnt_id FOREIGN KEY REFERENCES SITUACOES(situacao_id),
-	situacao_atual_id INT CONSTRAINT fk_sitAtu_id FOREIGN KEY REFERENCES SITUACOES(situacao_id) NOT NULL,
-	data_alteracao DATETIME NOT NULL,
+	pacote_situacao_id INT IDENTITY(1,1) CONSTRAINT pk_pac_situacoes PRIMARY KEY,
+	pacote_id INT CONSTRAINT fk_sit_pacotes FOREIGN KEY REFERENCES PACOTES(pacote_id) CONSTRAINT nn_pacote_id NOT NULL,
+	situacao_anterior_id INT CONSTRAINT fk_sit_anterior FOREIGN KEY REFERENCES SITUACOES(situacao_id),
+	situacao_atual_id INT CONSTRAINT fk_sit_atual FOREIGN KEY REFERENCES SITUACOES(situacao_id) CONSTRAINT nn_situacao_atual_id NOT NULL,
+	data_alteracao DATETIME CONSTRAINT nn_sit_data_alteracao NOT NULL,
 );
 
 CREATE TABLE ENTREGADORES (
-	entregador_id INT IDENTITY(1,1) CONSTRAINT pk_entregador PRIMARY KEY NOT NULL,
-	usuario_id INT CONSTRAINT fk_usuario_id FOREIGN KEY REFERENCES USUARIOS(usuario_id) NOT NULL,
+	entregador_id INT IDENTITY(1,1) CONSTRAINT pk_entregador PRIMARY KEY,
+	usuario_id INT CONSTRAINT fk_entreg_usuarios FOREIGN KEY REFERENCES USUARIOS(usuario_id) CONSTRAINT nn_usuario_id NOT NULL,
 	cpf BIGINT NOT NULL UNIQUE,
-	nome VARCHAR(100) NOT NULL,
+	nome VARCHAR(100) CONSTRAINT nn_nome_entregadores NOT NULL,
 	telefone VARCHAR(25) NOT NULL,
 	foto_perfil BINARY,
 );
 
 CREATE TABLE PACOTES_ENTREGADORES (
-	pacote_entregador_id INT IDENTITY(1,1) CONSTRAINT pk_pct_entg PRIMARY KEY NOT NULL,
-	pacote_id INT CONSTRAINT fk_pacote_id_ENTG FOREIGN KEY REFERENCES PACOTES(pacote_id) NOT NULL,
-	entregador_anterior_id INT CONSTRAINT fk_entgAnt_id FOREIGN KEY REFERENCES ENTREGADORES(entregador_id) NOT NULL,
-	entregador_atual_id INT CONSTRAINT fk_entgAtu_id FOREIGN KEY REFERENCES ENTREGADORES(entregador_id) NOT NULL,
-	data_alteracao DATETIME NOT NULL,
+	pacote_entregador_id INT IDENTITY(1,1) CONSTRAINT pk_pct_entg PRIMARY KEY,
+	pacote_id INT CONSTRAINT fk_entreg_pacotes FOREIGN KEY REFERENCES PACOTES(pacote_id) CONSTRAINT nn_entreg_pacote_id NOT NULL,
+	entregador_anterior_id INT CONSTRAINT fk_entreg_anterior FOREIGN KEY REFERENCES ENTREGADORES(entregador_id),
+	entregador_atual_id INT CONSTRAINT fk_entreg_atual FOREIGN KEY REFERENCES ENTREGADORES(entregador_id) CONSTRAINT nn_entreg_atual_id NOT NULL,
+	data_alteracao DATETIME CONSTRAINT nn_entreg_usuario_id NOT NULL,
 );
 
 -- INSERTS
 
 -- Inserts para TRANSPORTADORA
-INSERT INTO TRANSPORTADORA (nome, razao_social, cep, telefone)
+INSERT INTO TRANSPORTADORA (cnpj, nome, razao_social, cep, telefone)
 VALUES 
-('Transportadora A', 'Razão Social A', 12345678, '123456789'),
-('Transportadora B', 'Razão Social B', 23456789, '234567890'),
-('Transportadora C', 'Razão Social C', 34567890, '345678901'),
-('Transportadora D', 'Razão Social D', 45678901, '456789012'),
-('Transportadora E', 'Razão Social E', 56789012, '567890123');
+(89861037000118, 'Transportadora A', 'Razï¿½o Social A', 12345678, '123456789'),
+(20627057000122, 'Transportadora B', 'Razï¿½o Social B', 23456789, '234567890'),
+(73750691000114, 'Transportadora C', 'Razï¿½o Social C', 34567890, '345678901'),
+(25897214000133, 'Transportadora D', 'Razï¿½o Social D', 45678901, '456789012'),
+(34843138000174, 'Transportadora E', 'Razï¿½o Social E', 56789012, '567890123');
 
 -- Inserts para USUARIOS
-INSERT INTO USUARIOS (cpf, senha, admin_Us)
+INSERT INTO USUARIOS (cpf, senha, usuario_admin)
 VALUES 
 (12345678900, 'senha123', 1),
 (23456789011, 'senha456', 0),
@@ -110,11 +112,11 @@ VALUES
 -- Inserts para DESTINATARIOS
 INSERT INTO DESTINATARIOS (nome, cpf, telefone, rua, bairro, numero, complemento, cep)
 VALUES 
-('Destinatário A', 12345678900, '111234567890', 'Rua A', 'Bairro A', 123, 'Complemento A', 12345678),
-('Destinatário B', 23456789011, '222345678901', 'Rua B', 'Bairro B', 234, 'Complemento B', 23456789),
-('Destinatário C', 34567890122, '333456789012', 'Rua C', 'Bairro C', 345, 'Complemento C', 34567890),
-('Destinatário D', 45678901233, '444567890123', 'Rua D', 'Bairro D', 456, 'Complemento D', 45678901),
-('Destinatário E', 56789012344, '555678901234', 'Rua E', 'Bairro E', 567, 'Complemento E', 56789012);
+('Destinatï¿½rio A', 12345678900, '111234567890', 'Rua A', 'Bairro A', 123, 'Complemento A', 12345678),
+('Destinatï¿½rio B', 23456789011, '222345678901', 'Rua B', 'Bairro B', 234, 'Complemento B', 23456789),
+('Destinatï¿½rio C', 34567890122, '333456789012', 'Rua C', 'Bairro C', 345, 'Complemento C', 34567890),
+('Destinatï¿½rio D', 45678901233, '444567890123', 'Rua D', 'Bairro D', 456, 'Complemento D', 45678901),
+('Destinatï¿½rio E', 56789012344, '555678901234', 'Rua E', 'Bairro E', 567, 'Complemento E', 56789012);
 
 -- Inserts para PACOTES
 INSERT INTO PACOTES (destinatario_id, numero_pedido, cpf_recebedor, foto_pacote)
@@ -153,25 +155,25 @@ VALUES
 (3, NULL, 3, GETDATE());
 
 -- Select para TRANSPORTADORA
-SELECT * FROM TRANSPORTADORA;
+SELECT cnpj, nome, razao_social, cep, telefone FROM TRANSPORTADORA;
 
 -- Select para USUARIOS
-SELECT * FROM USUARIOS;
+SELECT usuario_id, cpf, senha, usuario_admin FROM USUARIOS;
 
 -- Select para SITUACOES
-SELECT * FROM SITUACOES;
+SELECT situacao_id, descricao FROM SITUACOES;
 
 -- Select para DESTINATARIOS
-SELECT * FROM DESTINATARIOS;
+SELECT destinatario_id, nome, cpf, telefone, rua, bairro, numero, complemento, cep FROM DESTINATARIOS;
 
 -- Select para PACOTES
-SELECT * FROM PACOTES;
+SELECT pacote_id, destinatario_id, numero_pedido, cpf_recebedor, foto_pacote FROM PACOTES;
 
--- Select para PACOTESSITUACOES
-SELECT * FROM PACOTESSITUACOES;
+-- Select para PACOTES_SITUACOES
+SELECT pacote_situacao_id, pacote_id, situacao_anterior_id, situacao_atual_id, data_alteracao FROM PACOTES_SITUACOES;
 
 -- Select para ENTREGADORES
-SELECT * FROM ENTREGADORES;
+SELECT entregador_id, usuario_id, cpf, nome, telefone, foto_perfil FROM ENTREGADORES;
 
--- Select para PACOTESENTREGADORES
-SELECT * FROM PACOTESENTREGADORES;
+-- Select para PACOTES_ENTREGADORES
+SELECT pacote_entregador_id, pacote_id,  entregador_anterior_id, entregador_atual_id, data_alteracao FROM PACOTES_ENTREGADORES;
