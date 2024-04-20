@@ -1,7 +1,8 @@
-CREATE DATABASE TransportApp;
-go
 USE TransportApp;
 go
+
+-- Alunos: Pedro Henrique Sauthier - 2562510
+-- Oliver Lohann Mayer - 2562502
 
 -- EXCLUSAO
 
@@ -83,14 +84,11 @@ CREATE TABLE PACOTES_ENTREGADORES (
 
 -- INSERTS
 
--- Inserts para TRANSPORTADORA
+-- Insert para TRANSPORTADORA
+-- A dona do app de gerenciamento.
 INSERT INTO TRANSPORTADORA (cnpj, nome, razao_social, cep, telefone)
 VALUES 
-(89861037000118, 'Transportadora A', 'Raz�o Social A', 12345678, '123456789'),
-(20627057000122, 'Transportadora B', 'Raz�o Social B', 23456789, '234567890'),
-(73750691000114, 'Transportadora C', 'Raz�o Social C', 34567890, '345678901'),
-(25897214000133, 'Transportadora D', 'Raz�o Social D', 45678901, '456789012'),
-(34843138000174, 'Transportadora E', 'Raz�o Social E', 56789012, '567890123');
+(89861037000118, 'Transportadora Comercial', 'Transportals', 12345678, '123456789');
 
 -- Inserts para USUARIOS
 INSERT INTO USUARIOS (cpf, senha, usuario_admin)
@@ -112,11 +110,11 @@ VALUES
 -- Inserts para DESTINATARIOS
 INSERT INTO DESTINATARIOS (nome, cpf, telefone, rua, bairro, numero, complemento, cep)
 VALUES 
-('Destinat�rio A', 12345678900, '111234567890', 'Rua A', 'Bairro A', 123, 'Complemento A', 12345678),
-('Destinat�rio B', 23456789011, '222345678901', 'Rua B', 'Bairro B', 234, 'Complemento B', 23456789),
-('Destinat�rio C', 34567890122, '333456789012', 'Rua C', 'Bairro C', 345, 'Complemento C', 34567890),
-('Destinat�rio D', 45678901233, '444567890123', 'Rua D', 'Bairro D', 456, 'Complemento D', 45678901),
-('Destinat�rio E', 56789012344, '555678901234', 'Rua E', 'Bairro E', 567, 'Complemento E', 56789012);
+('Destinatario A', 12345678900, '111234567890', 'Rua A', 'Bairro A', 123, 'Complemento A', 12345678),
+('Destinatario B', 23456789011, '222345678901', 'Rua B', 'Bairro B', 234, 'Complemento B', 23456789),
+('Destinatario C', 34567890122, '333456789012', 'Rua C', 'Bairro C', 345, 'Complemento C', 34567890),
+('Destinatario D', 45678901233, '444567890123', 'Rua D', 'Bairro D', 456, 'Complemento D', 45678901),
+('Destinatario E', 56789012344, '555678901234', 'Rua E', 'Bairro E', 567, 'Complemento E', 56789012);
 
 -- Inserts para PACOTES
 INSERT INTO PACOTES (destinatario_id, numero_pedido, cpf_recebedor, foto_pacote)
@@ -176,4 +174,4 @@ SELECT pacote_situacao_id, pacote_id, situacao_anterior_id, situacao_atual_id, d
 SELECT entregador_id, usuario_id, cpf, nome, telefone, foto_perfil FROM ENTREGADORES;
 
 -- Select para PACOTES_ENTREGADORES
-SELECT pacote_entregador_id, pacote_id,  entregador_anterior_id, entregador_atual_id, data_alteracao FROM PACOTES_ENTREGADORES;
+SELECT pacote_entregador_id, pacote_id, entregador_anterior_id, entregador_atual_id, data_alteracao FROM PACOTES_ENTREGADORES;
