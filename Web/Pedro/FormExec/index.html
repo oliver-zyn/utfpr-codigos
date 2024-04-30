@@ -1,100 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles/styles.css">
     <title>FormExec</title>
 </head>
+
 <body>
     <main>
-        <header class="flex">
+        <header>
             <p>Faça seu cadastro</p>
             <p>Campos marcados com (*) são de preencimento obrigatório</p>
         </header>
-        <fieldset class="flex-column">
-
-            <legend>
-                <span>1</span>
-                <h2>Login</h2>
-            </legend>
-
-            <form action="" method="post">
-                <div class="flex flex-column mb-2 mr-2">
-                    <label for="nome">Nome</label>
-                    <input type="text" name="nome" id="nome" placeholder="Digite seu nome">
-                </div>
-    
-                <div class="flex mb-2">
-                    <div class="flex flex-column w-100 mr-2">
-                        <label for="">E-mail</label>
-                        <input type="email" name="email" id="email" required>
+        <form action="#" method="post">
+            <div class="container-form">
+                <fieldset>
+                    <legend class="titulo">
+                        <span>1</span>
+                        <h2>Login</h2>
+                    </legend>
+                    <div class="campo">
+                        <label for="nome">Nome *</label>
+                        <input type="text" name="nome" id="nome" placeholder="Digite seu nome" required>
                     </div>
-                    <div class="flex flex-column w-100 mr-2">
-                        <label for="">Data de Nascimento</label>
+                    <div class="campo">
+                        <label for="email">Email *</label>
+                        <input type="email" name="email" id="email" placeholder="Digite seu email" required>
+                    </div>
+                    <div class="campo">
+                        <label for="senha">Senha *</label>
+                        <input type="password" name="senha" id="senha" placeholder="Digite sua senha" required>
+                    </div>
+                    <div class="campo">
+                        <label for="dataNasc">Data de nascimento</label>
                         <input type="date" name="dataNasc" id="dataNasc">
                     </div>
-                </div>
-    
-                <div class="flex mb-2">
-                    <div class="flex flex-column mr-2 w-100">
-                        <label for="cpf">CPF</label>
-                        <input type="text" name="cpf" id="cpf">
-                    </div>
-                    <div class="flex flex-column mr-2 w-100">
-                        <label for="rg">RG</label>
-                        <input type="text" id="rg" name="rg">
-                    </div>
-                    <div class="flex flex-column mr-2 w-100">
-                        <label for="telefone">Telefone</label>
-                        <input type="tel" name="telefone" id="telefone">
-                    </div>
-                </div>
-    
-                <div class="mb-2">
-                    <div>
-                        <label>Tipo</label>
-                    </div>
-                    <div class="flex">
+                    <div class="campo">
+                        <label>Declaro que sou</label>
                         <div>
-                            <input type="radio" name="tipo" id="economico" value="economico">
-                            <label for="economico">Econômico</label>
+                            <input type="radio" name="tipo" id="menor_Idade" value="menor">
+                            <label for="menor_Idade">menor que 18 anos</label>
                         </div>
                         <div>
-                            <input type="radio" name="tipo" id="padrao" value="padrao">
-                            <label for="padrao">Padrão</label>
-                        </div>
-                        <div>
-                            <input type="radio" name="tipo" id="luxo" value="luxo">
-                            <label for="luxo">Luxo</label>
+                            <input type="radio" name="tipo" id="maior_Idade" value="maior">
+                            <label for="maior_Idade">maior que 18 anos</label>
                         </div>
                     </div>
-                </div>
-    
-                <div class="flex mb-2">
-                    <div class="mr-2 w-15 flex flex-column">
-                        <label for="">Adultos</label>
-                        <select name="adultos" id="adultos">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
+                </fieldset>
+                <fieldset>
+                    <legend class="titulo">
+                        <span>2</span>
+                        <h2>Biografia</h2>
+                    </legend>
+                    <textarea name="biografia" id="biografia" cols="35" rows="10"></textarea>
+                </fieldset>
+
+                <fieldset>
+                    <legend class="titulo">
+                        <span>3</span>
+                        <h2>Dados profissionais</h2>
+                    </legend>
+                    <div class="interesses-container">
+                        <label for="interesses">Interesses</label>
+                        <select name="interesses" id="interesses">
+                            <option value="1">Desenvolvedor front-end</option>
+                            <option value="2">Marketing</option>
+                            <option value="3">Financeiro</option>
                         </select>
                     </div>
-    
-                    <div class="mr-2 w-15 flex flex-column">
-                        <label for="">Crianças</label>
-                        <select name="criancas" id="criancas">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                        </select>
+                </fieldset>
+
+                <fieldset>
+                    <legend class="titulo">
+                        <span>4</span>
+                        <h2>Envie seu curriculum vitae</h2>
+                    </legend>
+                    <div class="campo">
+                        <input type="file" name="curriculo" id="curriculo">
                     </div>
-                </div>
+                </fieldset>
                 <div>
-                    <input type="submit" value="Enviar">
+                    <input type="checkbox" name="receberEmail" id="receber_Email">
+                    <label for="receber_Email">Desejo receber as vagas por email</label>
                 </div>
-            </form>
-        </>
+            </div>
+
+            <div>
+                <input type="submit" value="Enviar">
+            </div>
+            </div>
+        </form>
     </main>
 </body>
+
 </html>

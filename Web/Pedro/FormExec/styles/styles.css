@@ -5,72 +5,117 @@
 }
 
 :root {
-    --dark-grey: rgb(94, 94, 94);
-    --light-grey: rgb(241, 241, 241);
+    --dark-grey: #5e5e5e;
+    --light-grey: #f1f1f1;
+    --blue: #428bca;
+    --white: #fff;
 }
 
 body {
     font-size: 1rem;
     font-family: 'Open Sans', sans-serif;
-    background-color: #f4f4f4;
 }
 
 main {
     width: 100%;
     max-width: 48rem;
     min-width: 20rem;
-    margin: auto;
-    margin-top: 6rem;
+    margin: 5rem auto;
     background-color: var(--light-grey);
     border-radius: 1rem;
+    overflow: hidden;
 }
 
 header {
+    display: flex;
     background-color: var(--dark-grey);
-    border-radius: 1rem 1rem 0 0;
-    color: #f4f4f4;
+    color: var(--white);
+    align-items: center;
     justify-content: space-between;
     padding: .8rem 2rem;
 }
 
-legend {
-    border-radius: 50%;
-    border:rgb(94, 94, 94) 1px solid;
-}
-
-.flex {
+.titulo {
     display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .titulo > span {
+    background: var(--blue);
+    color: var(--white);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+  }
+  
+  .titulo > h2 {
+    font-weight: 500;
+  }
+
+.container-form {
+    padding: 2rem 1rem;
 }
 
-.flex-column {
-    flex-direction: column;
-}
-
-.mr-2 {
-    margin-right: 2rem;
-}
-
-.mb-2 {
-    margin-bottom: .5rem;
-}
-
-input[type="text"],
-input[type="email"],
-input[type="date"],
-input[type="tel"],
-select
-{
-   padding: 10px;
-   border: 1px solid #ccc;
-   border-radius: 5px;
-   color:#333;
-}
-
-.w-100{
+form fieldset {
+    border: 0;
     width: 100%;
+    margin-bottom: 2.5rem;
 }
 
-.w-15{
-    width: 15%;
-}
+.campo {
+    display: flex;
+    margin-bottom: 0.5rem;
+    gap: 1rem;
+  }
+  
+  .campo > label {
+    width: 20%;
+  }
+  
+  form textarea {
+    width: 100%;
+  }
+  
+  .interesses {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  input[type="text"],
+  input[type="email"],
+  input[type="date"],
+  input[type="tel"],
+  input[type="password"],
+  select {
+   flex: 1;
+   padding: .625rem;
+   border: 1px solid #ccc;
+   border-radius: .3125rem;
+   color:#333;
+  }
+
+  input[type="date"],
+  input[type="password"],
+  select {
+    flex: none;
+  }
+  
+  input[type="submit"] {
+    background: var(--dark-grey);
+    color: var(--white);
+    padding: 1rem 2rem;
+    width: 100%;
+    border: 0;
+  }
+  
+  input[type="submit"]:hover {
+    transition: opacity 0.2s ease-in-out; 
+    opacity: 0.9;
+    cursor: pointer;
+  }
 
