@@ -1,0 +1,76 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --dark-grey: rgb(94, 94, 94);
+    --light-grey: rgb(241, 241, 241);
+}
+
+body {
+    font-size: 1rem;
+    font-family: 'Open Sans', sans-serif;
+    background-color: #f4f4f4;
+}
+
+main {
+    width: 100%;
+    max-width: 48rem;
+    min-width: 20rem;
+    margin: auto;
+    margin-top: 6rem;
+    background-color: var(--light-grey);
+    border-radius: 1rem;
+}
+
+header {
+    background-color: var(--dark-grey);
+    border-radius: 1rem 1rem 0 0;
+    color: #f4f4f4;
+    justify-content: space-between;
+    padding: .8rem 2rem;
+}
+
+legend {
+    border-radius: 50%;
+    border:rgb(94, 94, 94) 1px solid;
+}
+
+.flex {
+    display: flex;
+}
+
+.flex-column {
+    flex-direction: column;
+}
+
+.mr-2 {
+    margin-right: 2rem;
+}
+
+.mb-2 {
+    margin-bottom: .5rem;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="date"],
+input[type="tel"],
+select
+{
+   padding: 10px;
+   border: 1px solid #ccc;
+   border-radius: 5px;
+   color:#333;
+}
+
+.w-100{
+    width: 100%;
+}
+
+.w-15{
+    width: 15%;
+}
+

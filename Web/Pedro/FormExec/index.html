@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/styles.css">
+    <title>FormExec</title>
+</head>
+<body>
+    <main>
+        <header class="flex">
+            <p>Faça seu cadastro</p>
+            <p>Campos marcados com (*) são de preencimento obrigatório</p>
+        </header>
+        <fieldset class="flex-column">
+
+            <legend>
+                <span>1</span>
+                <h2>Login</h2>
+            </legend>
+
+            <form action="" method="post">
+                <div class="flex flex-column mb-2 mr-2">
+                    <label for="nome">Nome</label>
+                    <input type="text" name="nome" id="nome" placeholder="Digite seu nome">
+                </div>
+    
+                <div class="flex mb-2">
+                    <div class="flex flex-column w-100 mr-2">
+                        <label for="">E-mail</label>
+                        <input type="email" name="email" id="email" required>
+                    </div>
+                    <div class="flex flex-column w-100 mr-2">
+                        <label for="">Data de Nascimento</label>
+                        <input type="date" name="dataNasc" id="dataNasc">
+                    </div>
+                </div>
+    
+                <div class="flex mb-2">
+                    <div class="flex flex-column mr-2 w-100">
+                        <label for="cpf">CPF</label>
+                        <input type="text" name="cpf" id="cpf">
+                    </div>
+                    <div class="flex flex-column mr-2 w-100">
+                        <label for="rg">RG</label>
+                        <input type="text" id="rg" name="rg">
+                    </div>
+                    <div class="flex flex-column mr-2 w-100">
+                        <label for="telefone">Telefone</label>
+                        <input type="tel" name="telefone" id="telefone">
+                    </div>
+                </div>
+    
+                <div class="mb-2">
+                    <div>
+                        <label>Tipo</label>
+                    </div>
+                    <div class="flex">
+                        <div>
+                            <input type="radio" name="tipo" id="economico" value="economico">
+                            <label for="economico">Econômico</label>
+                        </div>
+                        <div>
+                            <input type="radio" name="tipo" id="padrao" value="padrao">
+                            <label for="padrao">Padrão</label>
+                        </div>
+                        <div>
+                            <input type="radio" name="tipo" id="luxo" value="luxo">
+                            <label for="luxo">Luxo</label>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="flex mb-2">
+                    <div class="mr-2 w-15 flex flex-column">
+                        <label for="">Adultos</label>
+                        <select name="adultos" id="adultos">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                        </select>
+                    </div>
+    
+                    <div class="mr-2 w-15 flex flex-column">
+                        <label for="">Crianças</label>
+                        <select name="criancas" id="criancas">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <input type="submit" value="Enviar">
+                </div>
+            </form>
+        </>
+    </main>
+</body>
+</html>

@@ -1,0 +1,115 @@
+DROP TABLE IF EXISTS PACOTES_SITUACOES;
+DROP TABLE IF EXISTS PACOTES;
+DROP TABLE IF EXISTS ENTREGADORES;
+DROP TABLE IF EXISTS DESTINATARIOS;
+DROP TABLE IF EXISTS SITUACOES;
+DROP TABLE IF EXISTS USUARIOS;
+
+-- CREATES
+
+CREATE TABLE USUARIOS (
+    usuario_id SERIAL PRIMARY KEY,
+    cpf VARCHAR(20) NOT NULL UNIQUE,
+    senha VARCHAR(100) NOT NULL,
+    usuario_admin SMALLINT NOT NULL
+);
+
+CREATE TABLE SITUACOES (
+    situacao_id SERIAL PRIMARY KEY,
+    descricao VARCHAR(10) NOT NULL
+);
+
+CREATE TABLE DESTINATARIOS (
+    destinatario_id SERIAL PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    cpf VARCHAR(20) NOT NULL UNIQUE,
+    telefone VARCHAR(25) NOT NULL,
+    rua VARCHAR(100) NOT NULL,
+    bairro VARCHAR(100) NOT NULL,
+    numero INT NOT NULL,
+    cep VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE PACOTES (
+    pacote_id SERIAL PRIMARY KEY,
+    destinatario_id INT REFERENCES DESTINATARIOS(destinatario_id) NOT NULL,
+    numero_pedido INT NOT NULL,
+    cpf_recebedor VARCHAR(20)
+);
+
+CREATE TABLE PACOTES_SITUACOES (
+    pacote_situacao_id SERIAL PRIMARY KEY,
+    pacote_id INT REFERENCES PACOTES(pacote_id) NOT NULL,
+    situacao_anterior_id INT REFERENCES SITUACOES(situacao_id),
+    situacao_atual_id INT REFERENCES SITUACOES(situacao_id) NOT NULL,
+    data_alteracao TIMESTAMP NOT NULL
+);
+
+CREATE TABLE ENTREGADORES (
+    entregador_id SERIAL PRIMARY KEY,
+    usuario_id INT REFERENCES USUARIOS(usuario_id) NOT NULL,
+    cpf VARCHAR(20) NOT NULL UNIQUE,
+    nome VARCHAR(100) NOT NULL,
+    telefone VARCHAR(25) NOT NULL
+);
+
+-- INSERTS
+
+-- Inserts para USUARIOS
+INSERT INTO USUARIOS (cpf, senha, usuario_admin)
+VALUES 
+('12345678900', 'senha123', 1),
+('23456789011', 'senha456', 0),
+('34567890122', 'senha789', 0),
+('45678901233', 'senha101', 0),
+('56789012344', 'senha112', 0);
+
+-- Inserts para SITUACOES
+INSERT INTO SITUACOES (descricao)
+VALUES 
+('Aguardando'),
+('Entregue'),
+('Devolvido'),
+('Extraviado');
+
+-- Inserts para DESTINATARIOS
+INSERT INTO DESTINATARIOS (nome, cpf, telefone, rua, bairro, numero, cep)
+VALUES 
+('Destinatario A', '12345678900', '111234567890', 'Rua A', 'Bairro A', 123, '12345678'),
+('Destinatario B', '23456789011', '222345678901', 'Rua B', 'Bairro B', 234, '23456789'),
+('Destinatario C', '34567890122', '333456789012', 'Rua C', 'Bairro C', 345, '34567890'),
+('Destinatario D', '45678901233', '444567890123', 'Rua D', 'Bairro D', 456, '45678901'),
+('Destinatario E', '56789012344', '555678901234', 'Rua E', 'Bairro E', 567, '56789012');
+
+-- Inserts para PACOTES
+INSERT INTO PACOTES (destinatario_id, numero_pedido, cpf_recebedor)
+VALUES 
+(1, 123456, '12345678900'),
+(2, 234567, '23456789011'),
+(3, 345678, '34567890122'),
+(4, 456789, '45678901233'),
+(5, 567890, '56789012344');
+
+-- Inserts para PACOTESSITUACOES
+INSERT INTO PACOTES_SITUACOES (pacote_id, situacao_anterior_id, situacao_atual_id, data_alteracao)
+VALUES 
+(1, NULL, 1, CURRENT_TIMESTAMP),
+(1, 1, 2, CURRENT_TIMESTAMP),
+(2, 1, 3, CURRENT_TIMESTAMP),
+(3, 1, 4, CURRENT_TIMESTAMP),
+(2, 3, 1, CURRENT_TIMESTAMP);
+
+-- Inserts para ENTREGADORES
+INSERT INTO ENTREGADORES (usuario_id, cpf, nome, telefone)
+VALUES 
+(1, '12345678900', 'Entregador A', '111234567890'),
+(2, '23456789011', 'Entregador B', '222345678901'),
+(3, '34567890122', 'Entregador C', '333456789012'),
+(4, '45678901233', 'Entregador D', '444567890123'),
+(5, '56789012344', 'Entregador E', '555678901234');
+
+select * from PACOTES
+select * from ENTREGADORES
+select * from USUARIOS
+select * from DESTINATARIOS
+select * from SITUACOES

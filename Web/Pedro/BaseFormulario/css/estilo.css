@@ -1,0 +1,41 @@
+body {
+    font-size: 1rem;
+    font-family: 'Open Sans', sans-serif;
+    background-color: #f4f4f4;
+}
+
+.flex {
+    display: flex;
+}
+
+.flex-column {
+    flex-direction: column;
+}
+
+.mr-2 {
+    margin-right: 2rem;
+}
+
+.mb-2 {
+    margin-bottom: .5rem;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="date"],
+input[type="tel"],
+select
+{
+   padding: 10px;
+   border: 1px solid #ccc;
+   border-radius: 5px;
+   color:#333;
+}
+
+.w-100{
+    width: 100%;
+}
+
+.w-15{
+    width: 15%;
+}
