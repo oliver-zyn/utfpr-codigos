@@ -62,6 +62,7 @@ public class CadastroEvento extends javax.swing.JDialog {
             carregaDados();
             ativaNavegacao();
         }
+        carregaCombos();
     }
 
     /**
@@ -349,6 +350,7 @@ public class CadastroEvento extends javax.swing.JDialog {
         if ((!evento.isEmpty()) && (i > 0)) {
             i = 0; // vai para o primeiro registro
             carregaDados();
+            carregaCombos();
         } else {
             JOptionPane.showMessageDialog(this, "Ja esta no primeiro registro");
         }
@@ -360,6 +362,7 @@ public class CadastroEvento extends javax.swing.JDialog {
         if ((!evento.isEmpty()) && (i > 0)) {
             i--; // vai para o registro anterior
             carregaDados();
+            carregaCombos();
         } else {
             JOptionPane.showMessageDialog(this, "J? est? no primeiro registro");
         }
@@ -371,6 +374,7 @@ public class CadastroEvento extends javax.swing.JDialog {
         if ((!evento.isEmpty()) && (i < evento.size() - 1)) {
             i++; // vai para o pr?ximo registro
             carregaDados();
+            carregaCombos();
         } else {
             JOptionPane.showMessageDialog(this, "J? est? no ?ltimo registro");
         }
@@ -381,6 +385,7 @@ public class CadastroEvento extends javax.swing.JDialog {
         if ((!evento.isEmpty()) && (i < evento.size() - 1)) {
             i = evento.size() - 1; // vai para o ?ltimo registro
             carregaDados();
+            carregaCombos();
         } else {
             JOptionPane.showMessageDialog(this, "J? est? no ?ltimo registro");
         }
@@ -399,6 +404,7 @@ public class CadastroEvento extends javax.swing.JDialog {
                 i = 0;
                 // carrega os dados do primeiro registro
                 carregaDados();
+                carregaCombos();
             } else {
                 JOptionPane.showMessageDialog(this, "N?o h? mais registros");
                 // limpa os dados da tela
@@ -421,23 +427,67 @@ public class CadastroEvento extends javax.swing.JDialog {
         tfTitulo.setText(eventoaux.getTitulo());
         txtDescricao.setText(eventoaux.getDescricao());
         spMaxParticipantes.setValue(eventoaux.getMaxParticipantes());
-        ffDataEvento.setText(eventoaux.getDataEvento().toString());
         
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        String dataFormatada = dateFormat.format(eventoaux.getDataEvento());
+        ffDataEvento.setText(dataFormatada);
+    }
+    
+    private void carregaCombos() {
         DefaultComboBoxModel<String> modelPale = new DefaultComboBoxModel<>();
         DefaultComboBoxModel<String> modelLocal = new DefaultComboBoxModel<>();
-        
+
+        modelPale.addElement("(Selecione)");
+        modelLocal.addElement("(Selecione)");
+
         for (Palestrante palestrante : palestrantes) {
             String item = palestrante.getId() + " - " + palestrante.getNome();
             modelPale.addElement(item);
         }
-        
+
         for (Local local : locais) {
             String item = local.getId() + " - " + local.getNome();
             modelLocal.addElement(item);
         }
-        
+
         cbPalestrante.setModel(modelPale);
         cbLocal.setModel(modelLocal);
+    
+        if (!evento.isEmpty()) {
+            eventoaux = evento.get(i);
+            int idPalestranteEvento = eventoaux.getPalestrante().getId();
+            int idLocalEvento = eventoaux.getLocal().getId();
+
+            for (int j = 0; j < modelPale.getSize(); j++) {
+                String item = modelPale.getElementAt(j);
+                
+                if (item.equals("(Selecione)")) {
+                    continue;
+                }
+
+                int idPalestranteAtual = Integer.parseInt(item.split(" - ")[0]);
+
+                if (idPalestranteEvento == idPalestranteAtual) {
+                    cbPalestrante.setSelectedIndex(j);
+                    break;
+                }
+            }
+            
+            for (int j = 0; j < modelPale.getSize(); j++) {
+                String item = modelLocal.getElementAt(j);
+                
+                if (item.equals("(Selecione)")) {
+                    continue;
+                }
+
+                int idEventoAtual = Integer.parseInt(item.split(" - ")[0]);
+
+                if (idLocalEvento == idEventoAtual) {
+                    cbLocal.setSelectedIndex(j);
+                    break;
+                }
+            }
+        }
     }
 
     // m?todo para ativar apenas os bot?es que podem ser utilizados quando um

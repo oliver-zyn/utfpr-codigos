@@ -241,16 +241,15 @@ public class CadastroParticipante extends javax.swing.JDialog {
         String email = tfEmail.getText();
         String cpf = tfCpf.getText();
         String telefone = tfTelefone.getText();
-        
-        // criando um objeto com os dados da tela
-        partaux = new Participante(nome, email, cpf, telefone);
-        // adicionando o objeto ao vetor din?mico de clientes
+
         if (novo) {
+            partaux = new Participante(nome, email, cpf, telefone);
             con.inserir(partaux);
-            participante.add(partaux);
+            participante = con.listar();
             i = participante.size() - 1;
         } else {
-            // altera os dados da posi??o armazenada em i
+            Participante partaux2 = participante.get(i);
+            partaux = new Participante(partaux2.getId(), nome, email, cpf, telefone);
             con.alterar(partaux);
             participante.set(i, partaux);
         }

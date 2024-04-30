@@ -24,6 +24,14 @@ public class Participante {
         this.cpf = cpf;
         this.telefone = telefone;
     }
+    
+    public Participante(int id, String nome, String email, String cpf, String telefone) {
+        this.id = id;
+        this.nome = nome;
+        this.email = email;
+        this.cpf = cpf;
+        this.telefone = telefone;
+    }
 
     public int getId() {
         return id;

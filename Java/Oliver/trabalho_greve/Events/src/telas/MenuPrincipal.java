@@ -48,7 +48,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         miParticipantes = new javax.swing.JMenuItem();
         miPalestrantes = new javax.swing.JMenuItem();
         miLocais = new javax.swing.JMenuItem();
-        miEstatistica = new javax.swing.JMenuItem();
+        miEventos = new javax.swing.JMenuItem();
         miLerEstatistica = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         miSair = new javax.swing.JMenuItem();
@@ -91,16 +91,16 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(miLocais);
 
-        miEstatistica.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F8, java.awt.event.InputEvent.CTRL_DOWN_MASK));
-        miEstatistica.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/bricks.png"))); // NOI18N
-        miEstatistica.setText("Eventos");
-        miEstatistica.setToolTipText("Número de cidades feias e modernas");
-        miEstatistica.addActionListener(new java.awt.event.ActionListener() {
+        miEventos.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F8, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        miEventos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/bricks.png"))); // NOI18N
+        miEventos.setText("Eventos");
+        miEventos.setToolTipText("Número de cidades feias e modernas");
+        miEventos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                miEstatisticaActionPerformed(evt);
+                miEventosActionPerformed(evt);
             }
         });
-        jMenu1.add(miEstatistica);
+        jMenu1.add(miEventos);
 
         miLerEstatistica.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F9, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         miLerEstatistica.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/layout_sidebar.png"))); // NOI18N
@@ -195,23 +195,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
         cLocal.setVisible(true);
     }//GEN-LAST:event_miLocaisActionPerformed
 
-    private void miEstatisticaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miEstatisticaActionPerformed
-//        try {
-//            // TODO add your handling code here:
-//            FileWriter arq = new FileWriter("estcidade.txt");
-//            PrintWriter gravaArq = new PrintWriter(arq);
-//            for (int i = 0; i < listacid.size(); i++) {
-//                gravaArq.println("C�digo| " + listacid.get(i).getCodCidade()
-//                        + ";Cidade| " + listacid.get(i).getCidade()
-//                        + ";Estado| " + listacid.get(i).getEstado());
-//            }
-//            gravaArq.close();
-//            JOptionPane.showMessageDialog(this, "Arquivo gerado com sucesso");
-//        } catch (IOException ex) {
-//            JOptionPane.showMessageDialog(this, "Deu erro no arquivo");
-//        }
-
-    }//GEN-LAST:event_miEstatisticaActionPerformed
+    private void miEventosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miEventosActionPerformed
+        JDialog cEvento = new CadastroEvento(this, true);
+        cEvento.setVisible(true);
+    }//GEN-LAST:event_miEventosActionPerformed
 
     private void miLerEstatisticaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miLerEstatisticaActionPerformed
 //        try {
@@ -256,7 +243,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
-    private javax.swing.JMenuItem miEstatistica;
+    private javax.swing.JMenuItem miEventos;
     private javax.swing.JMenuItem miLerEstatistica;
     private javax.swing.JMenuItem miLocais;
     private javax.swing.JMenuItem miPalestrantes;

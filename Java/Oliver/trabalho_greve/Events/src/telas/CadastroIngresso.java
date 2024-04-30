@@ -5,8 +5,8 @@
 
 package telas;
 
-import conexoes.LocalDAO;
-import entidades.Local;
+import conexoes.IngressoDAO;
+import entidades.Ingresso;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -15,11 +15,11 @@ import javax.swing.JOptionPane;
  *
  * @author Geri
  */
-public class CadastroLocal extends javax.swing.JDialog {
+public class CadastroIngresso extends javax.swing.JDialog {
 // vetor din?mico para clientes
-    LocalDAO con = new LocalDAO(); 
-    List<Local> local = new ArrayList();
-    Local localaux;
+    IngressoDAO con = new IngressoDAO(); 
+    List<Ingresso> ingresso = new ArrayList();
+    Ingresso ingressoaux;
     // vari?vel para saber se ? para adicionar um novo registro ou para alterar
     // o registro corrente
     boolean novo = false;
@@ -28,18 +28,18 @@ public class CadastroLocal extends javax.swing.JDialog {
     int i = -1;
 
     /**
-     * Creates new form CadastroLocal
+     * Creates new form CadastroIngresso
      * @param parent
      * @param modal
      */
-    public CadastroLocal(java.awt.Frame parent,
+    public CadastroIngresso(java.awt.Frame parent,
             boolean modal) {
         super(parent, modal);
         initComponents();
         // informa como devem estar os bot?es no in?cio do processo
         ativaInicio();
-        local = con.listar();
-        if (!local.isEmpty()) {
+        ingresso = con.listar();
+        if (!ingresso.isEmpty()) {
             i = 0;
             carregaDados();
             ativaNavegacao();
@@ -59,13 +59,13 @@ public class CadastroLocal extends javax.swing.JDialog {
         buttonGroup2 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        tfNome = new javax.swing.JTextField();
-        tfEndereco = new javax.swing.JTextField();
-        tfCidade = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        spCapacidade = new javax.swing.JSpinner();
+        spQuantidade = new javax.swing.JSpinner();
+        cbEvento = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
+        cbTipo = new javax.swing.JComboBox<>();
+        spPreco = new javax.swing.JSpinner();
         jPanel2 = new javax.swing.JPanel();
         btPrimeiro = new javax.swing.JButton();
         btAnterior = new javax.swing.JButton();
@@ -81,13 +81,22 @@ public class CadastroLocal extends javax.swing.JDialog {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Dados do Local"));
 
-        jLabel1.setText("Nome:");
+        jLabel1.setText("Preço:");
 
-        jLabel2.setText("Endereço:");
+        jLabel3.setText("Tipo:");
 
-        jLabel3.setText("Cidade:");
+        jLabel6.setText("Quantidade:");
 
-        jLabel6.setText("Capacidade:");
+        cbEvento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "(Selecione)" }));
+
+        jLabel5.setText("Evento:");
+
+        cbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "(Selecione)", "Normal", "Meia-entrada", "Vip" }));
+        cbTipo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbTipoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -96,40 +105,42 @@ public class CadastroLocal extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel6))
-                .addGap(39, 39, 39)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tfEndereco, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
-                    .addComponent(tfCidade)
-                    .addComponent(tfNome)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(spCapacidade, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel5))
+                        .addGap(65, 65, 65)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(cbEvento, 0, 126, Short.MAX_VALUE)
+                            .addComponent(cbTipo, 0, 126, Short.MAX_VALUE)
+                            .addComponent(spPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addGap(39, 39, 39)
+                        .addComponent(spQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfNome, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addGap(9, 9, 9)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addGap(9, 9, 9)
+                    .addComponent(jLabel1)
+                    .addComponent(spPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(tfCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(9, 9, 9)
+                    .addComponent(cbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbEvento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(spCapacidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(16, Short.MAX_VALUE))
+                    .addComponent(spQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         jPanel2.setLayout(new java.awt.GridLayout(2, 4));
@@ -223,11 +234,11 @@ public class CadastroLocal extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        setSize(new java.awt.Dimension(416, 318));
+        setSize(new java.awt.Dimension(416, 323));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -239,22 +250,20 @@ public class CadastroLocal extends javax.swing.JDialog {
 
     private void btSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvarActionPerformed
         // TODO add your handling code here:
-        String nome = tfNome.getText();
-        String endereco = tfEndereco.getText();
-        String cidade = tfCidade.getText();
-        int capacidade = ((Number) spCapacidade.getValue()).intValue();
+        double preco = ((Number) spPreco.getValue()).doubleValue();
+        int capacidade = ((Number) spQuantidade.getValue()).intValue();
         
         // criando um objeto com os dados da tela
-        localaux = new Local(nome, endereco, cidade, capacidade);
+        //ingressoaux = new Ingresso(nome, endereco, cidade, capacidade);
         // adicionando o objeto ao vetor din?mico de clientes
         if (novo) {
-            con.inserir(localaux);
-            local.add(localaux);
-            i = local.size() - 1;
+            con.inserir(ingressoaux);
+            ingresso.add(ingressoaux);
+            i = ingresso.size() - 1;
         } else {
             // altera os dados da posi??o armazenada em i
-            con.alterar(localaux);
-            local.set(i, localaux);
+            con.alterar(ingressoaux);
+            ingresso.set(i, ingressoaux);
         }
         novo = false;
         ativaNavegacao();
@@ -266,13 +275,13 @@ public class CadastroLocal extends javax.swing.JDialog {
         novo = true;
         ativaEdicao();
         // manda o curso ficar no campo c?digo
-        tfNome.requestFocus();
+        spPreco.requestFocus();
     }//GEN-LAST:event_btNovoActionPerformed
 
     private void btPrimeiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPrimeiroActionPerformed
         // TODO add your handling code here:
         // testa se j? h? registros inclu?dos
-        if ((!local.isEmpty()) && (i > 0)) {
+        if ((!ingresso.isEmpty()) && (i > 0)) {
             i = 0; // vai para o primeiro registro
             carregaDados();
         } else {
@@ -283,7 +292,7 @@ public class CadastroLocal extends javax.swing.JDialog {
     private void btAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAnteriorActionPerformed
         // TODO add your handling code here:
         // testa se tem registros e se ainda n?o est? no primeiro registro
-        if ((!local.isEmpty()) && (i > 0)) {
+        if ((!ingresso.isEmpty()) && (i > 0)) {
             i--; // vai para o registro anterior
             carregaDados();
         } else {
@@ -294,7 +303,7 @@ public class CadastroLocal extends javax.swing.JDialog {
     private void btProximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btProximoActionPerformed
         // TODO add your handling code here:
         // testa se tem registros e se n?o est? no ?ltimo registro
-        if ((!local.isEmpty()) && (i < local.size() - 1)) {
+        if ((!ingresso.isEmpty()) && (i < ingresso.size() - 1)) {
             i++; // vai para o pr?ximo registro
             carregaDados();
         } else {
@@ -304,8 +313,8 @@ public class CadastroLocal extends javax.swing.JDialog {
 
     private void btUltimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btUltimoActionPerformed
         // TODO add your handling code here:
-        if ((!local.isEmpty()) && (i < local.size() - 1)) {
-            i = local.size() - 1; // vai para o ?ltimo registro
+        if ((!ingresso.isEmpty()) && (i < ingresso.size() - 1)) {
+            i = ingresso.size() - 1; // vai para o ?ltimo registro
             carregaDados();
         } else {
             JOptionPane.showMessageDialog(this, "J? est? no ?ltimo registro");
@@ -317,10 +326,10 @@ public class CadastroLocal extends javax.swing.JDialog {
         // testa se h? registros
         if (i >= 0) {
             // remove o registro corrente
-            con.remover(local.get(i).getId());
-            local.remove(i);
+            con.remover(ingresso.get(i).getId());
+            ingresso.remove(i);
             // testa se ainda h? registros
-            if (!local.isEmpty()) {
+            if (!ingresso.isEmpty()) {
                 // volta para o primeiro registro
                 i = 0;
                 // carrega os dados do primeiro registro
@@ -335,15 +344,17 @@ public class CadastroLocal extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_btExcluirActionPerformed
 
+    private void cbTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbTipoActionPerformed
+
     // m?todo para carregar os dados do vetor din?mico para a tela
     private void carregaDados() {
         // os dados ser?o carregados da posi??o corrente, ou seja, do valor
         // armazenado em i
-        localaux = local.get(i); // recupera o cliente armazenado em i
-        tfNome.setText(localaux.getNome());
-        tfEndereco.setText(localaux.getEndereco());
-        tfCidade.setText(localaux.getCidade());
-        spCapacidade.setValue(localaux.getCapacidade());
+        ingressoaux = ingresso.get(i); // recupera o cliente armazenado em i
+        spPreco.setValue(ingressoaux.getPreco());
+        spQuantidade.setValue(ingressoaux.getQuantidade());
     }
 
     // m?todo para ativar apenas os bot?es que podem ser utilizados quando um
@@ -382,10 +393,10 @@ public class CadastroLocal extends javax.swing.JDialog {
 
     // m?todo para limpar os campos do formul?rio
     private void limpaCampos() {
-        tfNome.setText("");
-        tfEndereco.setText("");
-        tfCidade.setText((""));
-        spCapacidade.setValue((0));
+//        tfNome.setText("");
+//        tfEndereco.setText("");
+//        tfCidade.setText((""));
+        spQuantidade.setValue((0));
     }
 
     /**
@@ -396,7 +407,7 @@ public class CadastroLocal extends javax.swing.JDialog {
 
             @Override
             public void run() {
-                CadastroLocal dialog = new CadastroLocal(new javax.swing.JFrame(), true);
+                CadastroIngresso dialog = new CadastroIngresso(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
 
                     @Override
@@ -419,16 +430,16 @@ public class CadastroLocal extends javax.swing.JDialog {
     private javax.swing.JButton btUltimo;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.JComboBox<String> cbEvento;
+    private javax.swing.JComboBox<String> cbTipo;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JSpinner spCapacidade;
-    private javax.swing.JTextField tfCidade;
-    private javax.swing.JTextField tfEndereco;
-    private javax.swing.JTextField tfNome;
+    private javax.swing.JSpinner spPreco;
+    private javax.swing.JSpinner spQuantidade;
     // End of variables declaration//GEN-END:variables
 
 }

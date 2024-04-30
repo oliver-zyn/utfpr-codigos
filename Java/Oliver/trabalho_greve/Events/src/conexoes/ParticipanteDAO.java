@@ -94,14 +94,16 @@ public class ParticipanteDAO extends AbstractDAO<Participante> {
 
     @Override
     public boolean alterar(Participante a) {
-        String sql = "UPDATE aluno SET nome=?, email=?, cpf=?, telefone=? WHERE id=?";
+        String sql = "UPDATE participantes SET nome=?, email=?, cpf=?, telefone=? WHERE id=?";
         try {
             stmt = conexao.prepareStatement(sql);
             stmt.setString(1, a.getNome());
             stmt.setString(2, a.getEmail());
             stmt.setString(3, a.getCpf());
-            stmt.setString(4, a.getTelefone());           
+            stmt.setString(4, a.getTelefone());
+            stmt.setInt(5, a.getId());
             stmt.execute();
+            logger.info(stmt.toString());
             logger.info("Alteracao no banco de dados realizada!.");
             stmt.close();
             return true;

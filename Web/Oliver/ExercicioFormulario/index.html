@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles/style.css">
+  <title>Document</title>
+</head>
+<body>
+
+  <main>
+    <header>
+      <p>Faça seu cadastro</p>
+      <p>Campos marcados com (*) são de preenchimento obrigatório</p>
+    </header>
+    <form action="#" method="post">
+      <div class="form-container">
+        <fieldset>
+          <legend class="titulo-form">
+            <span>1</span>
+            <h2>Login</h2>
+          </legend>
+          <div class="campo-container">
+            <label for="nome">Nome *</label>
+            <input type="text" name="nome" id="nome" placeholder="Digite seu nome" required>
+          </div>
+          <div class="campo-container">
+            <label for="email">Email *</label>
+            <input type="email" name="email" id="email" placeholder="Digite seu email" required>
+          </div>
+          <div class="campo-container">
+            <label for="senha">Senha *</label>
+            <input type="password" name="senha" id="senha" placeholder="Digite sua senha" required>
+          </div>
+          <div class="campo-container">
+            <label for="dataNasc">Data de nascimento</label>
+            <input type="date" name="dataNasc" id="dataNasc">
+          </div>
+          <div class="campo-container">
+            <label>Declaro que sou</label>
+            <div>
+                <input type="radio" name="tipo" id="menorIdade" value="menor">
+                <label for="menorIdade">menor que 18 anos</label>
+            </div>
+            <div>
+                <input type="radio" name="tipo" id="maiorIdade" value="maior">
+                <label for="maiorIdade">maior que 18 anos</label>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend class="titulo-form">
+            <span>2</span>
+            <h2>Biografia</h2>
+          </legend>
+          <textarea name="biografia" id="biografia" cols="30" rows="10"></textarea>
+        </fieldset>
+        <fieldset>
+          <legend class="titulo-form">
+            <span>3</span>
+            <h2>Dados profissionais</h2>
+          </legend>
+          <div class="interesses-container">
+            <label for="interesses">Interesses</label>
+            <select name="interesses" id="interesses">
+                <option value="1">Desenvolvedor front-end</option>
+                <option value="2">Desenvolvedor back-end</option>
+                <option value="3">Desenvolvedor fullstack</option>
+            </select>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend class="titulo-form">
+            <span>4</span>
+            <h2>Envie seu curriculum vitae</h2>
+          </legend>
+          <div class="campo-container">
+            <input type="file" name="curriculo" id="curriculo">
+          </div>
+        </fieldset>
+        <div>
+          <input type="checkbox" name="receberEmail" id="receberEmail">
+          <label for="receberEmail">Desejo receber as vagas por email</label>
+        </div>
+      </div>
+      
+      <div>
+        <input type="submit" value="Enviar">
+      </div>
+    </form> 
+  </main>
+</body>
+</html>
