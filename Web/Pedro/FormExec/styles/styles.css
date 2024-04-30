@@ -82,9 +82,13 @@ form fieldset {
     border-radius: 6px;
   }
   
-  .interesses {
+  .interesses-cont {
     display: flex;
     flex-direction: column;
+  }
+
+  .interesses-cont label {
+    flex: 1;
   }
   
   input[type="text"],
