@@ -136,7 +136,7 @@ int consulta_ArvAVL(NoArvAVL *raiz, char nome[100]){
 
 //=================================
 void RotacaoLL(NoArvAVL *A){//LL
-    printf(".RotacaoLL\n");
+    printf("\nRotacaoLL realizada\n");
     struct no_arvore *B;
     B = (*A)->esq;
     (*A)->esq = B->dir;
@@ -147,7 +147,7 @@ void RotacaoLL(NoArvAVL *A){//LL
 }
 
 void RotacaoRR(NoArvAVL *A){//RR
-    printf(".RotacaoRR\n");
+    printf("\nRotacaoRR realizada\n");
     struct no_arvore *B;
     B = (*A)->dir;
     (*A)->dir = B->esq;
@@ -158,11 +158,13 @@ void RotacaoRR(NoArvAVL *A){//RR
 }
 
 void RotacaoLR(NoArvAVL *A){//LR
+    printf("\nRotacaoLR realizada");
     RotacaoRR(&(*A)->esq);
     RotacaoLL(A);
 }
 
 void RotacaoRL(NoArvAVL *A){//RL
+    printf("\nRotacaoRL realizada");
     RotacaoLL(&(*A)->dir);
     RotacaoRR(A);
 }
