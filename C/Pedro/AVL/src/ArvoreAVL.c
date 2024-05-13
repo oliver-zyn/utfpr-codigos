@@ -136,7 +136,7 @@ int consulta_ArvAVL(NoArvAVL *raiz, char nome[100]){
 
 //=================================
 void RotacaoLL(NoArvAVL *A){//LL
-    printf("\nRotacaoLL realizada\n");
+    printf("\nRotacaoLL realizada");
     struct no_arvore *B;
     B = (*A)->esq;
     (*A)->esq = B->dir;
@@ -147,7 +147,7 @@ void RotacaoLL(NoArvAVL *A){//LL
 }
 
 void RotacaoRR(NoArvAVL *A){//RR
-    printf("\nRotacaoRR realizada\n");
+    printf("\nRotacaoRR realizada");
     struct no_arvore *B;
     B = (*A)->dir;
     (*A)->dir = B->esq;
@@ -158,18 +158,18 @@ void RotacaoRR(NoArvAVL *A){//RR
 }
 
 void RotacaoLR(NoArvAVL *A){//LR
-    printf("\nRotacaoLR realizada");
+    printf("\nRotacaoLR realizada entao:");
     RotacaoRR(&(*A)->esq);
     RotacaoLL(A);
 }
 
 void RotacaoRL(NoArvAVL *A){//RL
-    printf("\nRotacaoRL realizada");
+    printf("\nRotacaoRL realizada entao:");
     RotacaoLL(&(*A)->dir);
     RotacaoRR(A);
 }
 
-int insere_ArvAVL(NoArvAVL *raiz, char nome[100], int idade, float pontuacao){
+int insere_ArvAVL(NoArvAVL *raiz, char nome[100], int idade){
     int res;
     if(*raiz == NULL){
         struct no_arvore *novo;
@@ -179,7 +179,7 @@ int insere_ArvAVL(NoArvAVL *raiz, char nome[100], int idade, float pontuacao){
 
         strcpy(novo->nome, nome);
         novo->idade = idade;
-        novo->pontuacao = pontuacao;
+        novo->pontuacao = 0;
         novo->altura = 0;
         novo->esq = NULL;
         novo->dir = NULL;
@@ -190,7 +190,7 @@ int insere_ArvAVL(NoArvAVL *raiz, char nome[100], int idade, float pontuacao){
     struct no_arvore *atual = *raiz;
     int cmp = nome[0] - atual->nome[0];
     if(cmp < 0){
-        if((res = insere_ArvAVL(&(atual->esq), nome, idade, pontuacao)) == 1){
+        if((res = insere_ArvAVL(&(atual->esq), nome, idade)) == 1){
             if(fatorBalanceamento_NO(atual) >= 2){
                 if(nome[0] < (*raiz)->esq->nome[0]){
                     RotacaoLL(raiz);
@@ -200,7 +200,7 @@ int insere_ArvAVL(NoArvAVL *raiz, char nome[100], int idade, float pontuacao){
             }
         }
     }else if(cmp > 0){
-        if((res = insere_ArvAVL(&(atual->dir), nome, idade, pontuacao)) == 1){
+        if((res = insere_ArvAVL(&(atual->dir), nome, idade)) == 1){
             if(fatorBalanceamento_NO(atual) >= 2){
                 if((*raiz)->dir->nome[0] < nome[0]){
                     RotacaoRR(raiz);
@@ -220,10 +220,6 @@ int insere_ArvAVL(NoArvAVL *raiz, char nome[100], int idade, float pontuacao){
 }
 
 void alteraPontuacao_Participante(NoArvAVL *raiz, char nome[100], int resultado){
-    if(*raiz == NULL) {
-        printf("O participante \"%s\" nao existe na arvore!\n", nome);
-        return;
-    }
 
     float altRes = 0.5;
 
@@ -247,6 +243,20 @@ void alteraPontuacao_Participante(NoArvAVL *raiz, char nome[100], int resultado)
 }
 
 void resultadoPontuacao(NoArvAVL *raiz, char nome1[100], int resultado1, char nome2[100], int resultado2) {
+    int encontrado1 = consulta_ArvAVL(raiz, nome1);
+    int encontrado2 = consulta_ArvAVL(raiz, nome2);
+
+    if (!encontrado1) {
+        printf("O participante \"%s\" nao existe na arvore!\n", nome1);
+    }
+    if (!encontrado2) {
+        printf("O participante \"%s\" nao existe na arvore!\n", nome2);
+    }
+    if (!encontrado1 || !encontrado2) {
+        printf("Nenhuma alteracao na pontuacao foi feita.\n");
+        return;
+    }
+
     int resultado = 0;
     if (resultado1 > resultado2) {
         resultado = 1;

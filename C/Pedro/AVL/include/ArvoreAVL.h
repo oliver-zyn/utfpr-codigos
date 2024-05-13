@@ -3,7 +3,7 @@ typedef struct no_arvore* NoArvAVL;
 
 NoArvAVL* cria_ArvAVL();
 void libera_ArvAVL(NoArvAVL *raiz);
-int insere_ArvAVL(NoArvAVL *raiz, char nome[100], int idade, float pontuacao);
+int insere_ArvAVL(NoArvAVL *raiz, char nome[100], int idade);
 int remove_ArvAVL(NoArvAVL *raiz, char nome[100]);
 int estaVazia_ArvAVL(NoArvAVL *raiz);
 int altura_ArvAVL(NoArvAVL *raiz);

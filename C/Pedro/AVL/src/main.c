@@ -6,7 +6,6 @@ int main(){
     NoArvAVL* avl = cria_ArvAVL();
     char nome[100];
     int idade;
-    float pontuacao;
     char continuar;
 
     do {
@@ -16,11 +15,9 @@ int main(){
         printf("Digite a idade do participante: ");
         scanf("%d", &idade);
         fflush(stdin);
-        printf("Digite a pontuacao iniciao do participante: ");
-        scanf("%f", &pontuacao);
         fflush(stdin);
 
-        if (insere_ArvAVL(avl, nome, idade, pontuacao)) {
+        if (insere_ArvAVL(avl, nome, idade)) {
             printf("Participante adicionado com sucesso!\n");
         } else {
             printf("Erro ao adicionar participante.\n");
@@ -36,12 +33,14 @@ int main(){
     printf("\n");
 
     char nome1[100], nome2[100];
-    int resultado1, resultado2;
+    int resultado1, resultado2, i = 1;
     char continuar1;
 
     printf("\nInsercoes de resultados!\n");
 
     do {
+        printf("\nResultado da partida %d:\n", i);
+        i += 1;
         printf("\nDigite o nome do primeiro participante: ");
         gets(nome1);
         fflush(stdin);
