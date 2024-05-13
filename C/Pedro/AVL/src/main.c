@@ -3,41 +3,70 @@
 #include "../include/ArvoreAVL.h"
 
 int main(){
-    NoArvAVL* avl;
-    int res,i;
-    //int N = 10, dados[10] = {50,25,10,5,7,3,30,20,8,15};
-    //int N = 11, dados[11] = {50,25,10,5,5,7,3,30,20,8,15};
-    int N = 10, dados[10] = {1,2,3,10,4,5,9,7,8,6};
+    NoArvAVL* avl = cria_ArvAVL();
+    char nome[100];
+    int idade;
+    float pontuacao;
+    char continuar;
 
-    avl = cria_ArvAVL();
-    printf("Inserindo dados: \n\n");
-    for(i=0;i<N;i++){
-        printf("\nInsere no %d: %d\n", i, dados[i]);
-        res = insere_ArvAVL(avl,dados[i]);
-    }
-    printf("\n\n");
+    do {
+        printf("Digite o nome do participante: ");
+        gets(nome);
+        fflush(stdin);
+        printf("Digite a idade do participante: ");
+        scanf("%d", &idade);
+        fflush(stdin);
+        printf("Digite a pontuacao iniciao do participante: ");
+        scanf("%f", &pontuacao);
+        fflush(stdin);
 
-    printf("\nImpressao da arvore AVL - pre ordem:\n");
-    preOrdem_ArvAVL(avl, -1);
-    printf("\n\n");
+        if (insere_ArvAVL(avl, nome, idade, pontuacao)) {
+            printf("Participante adicionado com sucesso!\n");
+        } else {
+            printf("Erro ao adicionar participante.\n");
+        }
 
-    printf("\nRemocao do no com valor 6:\n");
-    remove_ArvAVL(avl,6);
-
-    printf("\nRemocao do no com valor 7:\n");
-    remove_ArvAVL(avl,7);
+        printf("\nDeseja adicionar outro participante? (S/N): ");
+        scanf(" %c", &continuar);
+        fflush(stdin);
+    } while (continuar == 'S' || continuar == 's');
 
     printf("\nImpressao da arvore AVL - em ordem:\n");
-    emOrdem_ArvAVL(avl, -1);
-    printf("\n\n");
+    emOrdem_ArvAVL(avl, "Raiz");
+    printf("\n");
 
-    printf("\nImpressao da arvore AVL - pos ordem:\n");
-    posOrdem_ArvAVL(avl, -1);
-    printf("\n\n");
+    char nome1[100], nome2[100];
+    int resultado1, resultado2;
+    char continuar1;
 
+    printf("\nInsercoes de resultados!\n");
+
+    do {
+        printf("\nDigite o nome do primeiro participante: ");
+        gets(nome1);
+        fflush(stdin);
+        printf("Digite o resultado do primeiro participante (Rodadas Vencidas do Adversario): ");
+        scanf("%d", &resultado1);
+        fflush(stdin);
+
+        printf("\nDigite o nome do segundo participante: ");
+        gets(nome2);
+        fflush(stdin);
+        printf("Digite o resultado do segundo participante (Rodadas Vencidas do Adversario): ");
+        scanf("%d", &resultado2);
+        fflush(stdin);
+
+        resultadoPontuacao(avl, nome1, resultado1, nome2, resultado2);
+
+        printf("\nDeseja adicionar outro resultado? (S/N): ");
+        scanf(" %c", &continuar1);
+        fflush(stdin);
+    } while (continuar1 == 'S' || continuar1 == 's');
+
+    printf("\nImpressao da arvore AVL - em ordem:\n");
+    emOrdem_ArvAVL(avl, "Raiz");
+    printf("\n\n");
 
     libera_ArvAVL(avl);
-
-
     return 0;
 }

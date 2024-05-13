@@ -129,40 +129,42 @@ int consulta_ArvAVL(NoArvAVL *raiz, int valor){
 
 //=================================
 void RotacaoLL(NoArvAVL *A){//LL
-    printf(".RotacaoLL\n");
+    printf("Realizando rotação LL\n");
     struct no_arvore *B;
     B = (*A)->esq;
     (*A)->esq = B->dir;
     B->dir = *A;
-    (*A)->altura = maior(altura_NO((*A)->esq),altura_NO((*A)->dir)) + 1;
-    B->altura = maior(altura_NO(B->esq),(*A)->altura) + 1;
+    (*A)->altura = maior(altura_NO((*A)->esq), altura_NO((*A)->dir)) + 1;
+    B->altura = maior(altura_NO(B->esq), (*A)->altura) + 1;
     *A = B;
 }
 
 void RotacaoRR(NoArvAVL *A){//RR
-    printf(".RotacaoRR\n");
+    printf("Realizando rotação RR\n");
     struct no_arvore *B;
     B = (*A)->dir;
     (*A)->dir = B->esq;
     B->esq = (*A);
-    (*A)->altura = maior(altura_NO((*A)->esq),altura_NO((*A)->dir)) + 1;
-    B->altura = maior(altura_NO(B->dir),(*A)->altura) + 1;
+    (*A)->altura = maior(altura_NO((*A)->esq), altura_NO((*A)->dir)) + 1;
+    B->altura = maior(altura_NO(B->dir), (*A)->altura) + 1;
     (*A) = B;
 }
 
 void RotacaoLR(NoArvAVL *A){//LR
+    printf("Realizando rotação LR\n");
     RotacaoRR(&(*A)->esq);
     RotacaoLL(A);
 }
 
 void RotacaoRL(NoArvAVL *A){//RL
+    printf("Realizando rotação RL\n");
     RotacaoLL(&(*A)->dir);
     RotacaoRR(A);
 }
 
 int insere_ArvAVL(NoArvAVL *raiz, int valor){
     int res;
-    if(*raiz == NULL){//�rvore vazia ou n� folha
+    if(*raiz == NULL){
         struct no_arvore *novo;
         novo = (struct no_arvore*)malloc(sizeof(struct no_arvore));
         if(novo == NULL)

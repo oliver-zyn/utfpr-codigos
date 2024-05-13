@@ -1,12 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "../include/ArvoreAVL.h" //inclui os Prot�tipos
 
 struct no_arvore {
-    int info;
-    int altura;
+    char nome[100];
+    int idade;
+    float pontuacao;
     struct no_arvore *esq;
     struct no_arvore *dir;
+    int altura; // campo altura adicionado aqui
 };
 
 NoArvAVL* cria_ArvAVL(){
@@ -81,45 +84,49 @@ int altura_ArvAVL(NoArvAVL *raiz){
         return(alt_dir + 1);
 }
 
-void preOrdem_ArvAVL(NoArvAVL *raiz, int pai){
+void preOrdem_ArvAVL(NoArvAVL *raiz, char pai[100]){
     if(raiz == NULL)
         return;
     if(*raiz != NULL){
-        printf("Chave: %d - Altura(%d) - Pai: %d fb(%d)\n",(*raiz)->info,altura_NO(*raiz),pai, fatorBalanceamento_NO(*raiz));
-        preOrdem_ArvAVL(&((*raiz)->esq), (*raiz)->info);
-        preOrdem_ArvAVL(&((*raiz)->dir), (*raiz)->info);
+        printf("Nome: %s - Idade: %d - Pontuacao: %.1f - Altura: %d - Pai: %s - fb(%d)\n", 
+               (*raiz)->nome, (*raiz)->idade, (*raiz)->pontuacao, (*raiz)->altura, pai, fatorBalanceamento_NO(*raiz));
+        preOrdem_ArvAVL(&((*raiz)->esq), (*raiz)->nome);
+        preOrdem_ArvAVL(&((*raiz)->dir), (*raiz)->nome);
     }
 }
 
-void emOrdem_ArvAVL(NoArvAVL *raiz, int pai){
+void emOrdem_ArvAVL(NoArvAVL *raiz, char pai[100]){
     if(raiz == NULL)
         return;
     if(*raiz != NULL){
-        emOrdem_ArvAVL(&((*raiz)->esq), (*raiz)->info);
-        printf("Chave: %d - Altura(%d) - Pai: %d fb(%d)\n",(*raiz)->info,altura_NO(*raiz),pai, fatorBalanceamento_NO(*raiz));
-        emOrdem_ArvAVL(&((*raiz)->dir), (*raiz)->info);
+        emOrdem_ArvAVL(&((*raiz)->esq), (*raiz)->nome);
+        printf("Nome: %s - Idade: %d - Pontuacao: %.1f - Altura: %d - Pai: %s - fb(%d)\n", 
+               (*raiz)->nome, (*raiz)->idade, (*raiz)->pontuacao, altura_NO(*raiz), pai, fatorBalanceamento_NO(*raiz));
+        emOrdem_ArvAVL(&((*raiz)->dir), (*raiz)->nome);
     }
 }
 
-void posOrdem_ArvAVL(NoArvAVL *raiz, int pai){
+void posOrdem_ArvAVL(NoArvAVL *raiz, char pai[100]){
     if(raiz == NULL)
         return;
     if(*raiz != NULL){
-        posOrdem_ArvAVL(&((*raiz)->esq), (*raiz)->info);
-        posOrdem_ArvAVL(&((*raiz)->dir), (*raiz)->info);
-        printf("Chave: %d - Altura(%d) - Pai: %d fb(%d)\n",(*raiz)->info,altura_NO(*raiz),pai, fatorBalanceamento_NO(*raiz));
+        posOrdem_ArvAVL(&((*raiz)->esq), (*raiz)->nome);
+        posOrdem_ArvAVL(&((*raiz)->dir), (*raiz)->nome);
+        printf("Nome: %s - Idade: %d - Pontuacao: %.1f - Altura: %d - Pai: %s - fb(%d)\n", 
+               (*raiz)->nome, (*raiz)->idade, (*raiz)->pontuacao, altura_NO(*raiz), pai, fatorBalanceamento_NO(*raiz));
     }
 }
 
-int consulta_ArvAVL(NoArvAVL *raiz, int valor){
+int consulta_ArvAVL(NoArvAVL *raiz, char nome[100]){
     if(raiz == NULL)
         return 0;
     struct no_arvore* atual = *raiz;
     while(atual != NULL){
-        if(valor == atual->info){
+        int cmp = strcmp(nome, atual->nome);
+        if(cmp == 0){
             return 1;
         }
-        if(valor > atual->info)
+        if(cmp > 0)
             atual = atual->dir;
         else
             atual = atual->esq;
@@ -160,15 +167,17 @@ void RotacaoRL(NoArvAVL *A){//RL
     RotacaoRR(A);
 }
 
-int insere_ArvAVL(NoArvAVL *raiz, int valor){
+int insere_ArvAVL(NoArvAVL *raiz, char nome[100], int idade, float pontuacao){
     int res;
-    if(*raiz == NULL){//�rvore vazia ou n� folha
+    if(*raiz == NULL){
         struct no_arvore *novo;
         novo = (struct no_arvore*)malloc(sizeof(struct no_arvore));
         if(novo == NULL)
             return 0;
 
-        novo->info = valor;
+        strcpy(novo->nome, nome);
+        novo->idade = idade;
+        novo->pontuacao = pontuacao;
         novo->altura = 0;
         novo->esq = NULL;
         novo->dir = NULL;
@@ -177,101 +186,154 @@ int insere_ArvAVL(NoArvAVL *raiz, int valor){
     }
 
     struct no_arvore *atual = *raiz;
-    if(valor < atual->info){
-        if((res = insere_ArvAVL(&(atual->esq), valor)) == 1){
+    int cmp = nome[0] - atual->nome[0];
+    if(cmp < 0){
+        if((res = insere_ArvAVL(&(atual->esq), nome, idade, pontuacao)) == 1){
             if(fatorBalanceamento_NO(atual) >= 2){
-                if(valor < (*raiz)->esq->info ){
+                if(nome[0] < (*raiz)->esq->nome[0]){
                     RotacaoLL(raiz);
                 }else{
                     RotacaoLR(raiz);
                 }
             }
         }
-    }else{
-        if(valor > atual->info){
-            if((res = insere_ArvAVL(&(atual->dir), valor)) == 1){
-                if(fatorBalanceamento_NO(atual) >= 2){
-                    if((*raiz)->dir->info < valor){
-                        RotacaoRR(raiz);
-                    }else{
-                        RotacaoRL(raiz);
-                    }
+    }else if(cmp > 0){
+        if((res = insere_ArvAVL(&(atual->dir), nome, idade, pontuacao)) == 1){
+            if(fatorBalanceamento_NO(atual) >= 2){
+                if((*raiz)->dir->nome[0] < nome[0]){
+                    RotacaoRR(raiz);
+                }else{
+                    RotacaoRL(raiz);
                 }
             }
-        }else{
-            printf("Valor duplicado!!\n");
-            return 0;
         }
+    }else{
+        printf("Nome duplicado!!\n");
+        return 0;
     }
 
-    atual->altura = maior(altura_NO(atual->esq),altura_NO(atual->dir)) + 1;
+    atual->altura = maior(altura_NO(atual->esq), altura_NO(atual->dir)) + 1;
 
     return res;
 }
 
-struct no_arvore* procuraMenor(struct no_arvore* atual){
+void alteraPontuacao_Participante(NoArvAVL *raiz, char nome[100], int resultado){
+    if(*raiz == NULL) {
+        printf("O participante \"%s\" nao existe na arvore!\n", nome);
+        return;
+    }
+
+    float altRes = 0.5;
+
+    if(resultado == 1) {
+        altRes = 1;
+    } 
+    if(resultado == -1) {
+        altRes = 0;    
+    }
+
+    struct no_arvore *atual = *raiz;
+    int cmp = strcmp(nome, atual->nome);
+    if(cmp < 0) {
+        alteraPontuacao_Participante(&((*raiz)->esq), nome, resultado);
+    } else if(cmp > 0) {
+        alteraPontuacao_Participante(&((*raiz)->dir), nome, resultado);
+    } else {
+        atual->pontuacao += altRes;
+        printf("\nPontuacao do participante \"%s\" atualizada para %.1f\n", nome, atual->pontuacao);
+    }
+}
+
+void resultadoPontuacao(NoArvAVL *raiz, char nome1[100], int resultado1, char nome2[100], int resultado2) {
+    int resultado = 0;
+    if (resultado1 > resultado2) {
+        resultado = 1;
+        alteraPontuacao_Participante(&(*raiz), nome1, resultado);
+    }
+    if (resultado1 < resultado2) {
+        resultado = 1;
+        alteraPontuacao_Participante(&(*raiz), nome2, resultado);
+    }
+    if (resultado1 == resultado2) {
+        resultado = 0;
+        alteraPontuacao_Participante(&(*raiz), nome1, resultado);
+        alteraPontuacao_Participante(&(*raiz), nome2, resultado);
+    }
+}
+
+struct no_arvore* procuraMenorNome(struct no_arvore* atual) {
     struct no_arvore *no1 = atual;
     struct no_arvore *no2 = atual->esq;
-    while(no2 != NULL){
-        no1 = no2;
+    while (no2 != NULL) {
+        if (no2->nome[0] < no1->nome[0]) {
+            no1 = no2;
+        }
         no2 = no2->esq;
     }
     return no1;
 }
 
-int remove_ArvAVL(NoArvAVL *raiz, int valor){
-	if(*raiz == NULL){// valor n�o existe
-	    printf("valor n�o existe!!\n");
-	    return 0;
-	}
+int remove_ArvAVL(NoArvAVL *raiz, char nome[100]){
+    if(*raiz == NULL){// Árvore vazia
+        printf("A arvore esta vazia!\n");
+        return 0;
+    }
+
     int res;
-	if(valor < (*raiz)->info){
-	    if((res = remove_ArvAVL(&(*raiz)->esq,valor)) == 1){
+    struct no_arvore *atual = *raiz;
+    int cmp = strcmp(nome, atual->nome);
+    if(cmp < 0){
+        printf("Indo para o no esquerdo de %s\n", (*raiz)->nome);
+        if((res = remove_ArvAVL(&(*raiz)->esq, nome)) == 1){
+            printf("Realizando rotacao de balanceamento na raiz %s\n", (*raiz)->nome);
             if(fatorBalanceamento_NO(*raiz) >= 2){
                 if(altura_NO((*raiz)->dir->esq) <= altura_NO((*raiz)->dir->dir))
                     RotacaoRR(raiz);
                 else
                     RotacaoRL(raiz);
             }
-	    }
-	}
-    //continua��o
-	if((*raiz)->info < valor){
-	    if((res = remove_ArvAVL(&(*raiz)->dir, valor)) == 1){
+        }
+    }else if(cmp > 0){
+        printf("Indo para o no direito de %s\n", (*raiz)->nome);
+        if((res = remove_ArvAVL(&(*raiz)->dir, nome)) == 1){
+            printf("Realizando rotacao de balanceamento na raiz %s\n", (*raiz)->nome);
             if(fatorBalanceamento_NO(*raiz) >= 2){
                 if(altura_NO((*raiz)->esq->dir) <= altura_NO((*raiz)->esq->esq) )
                     RotacaoLL(raiz);
                 else
                     RotacaoLR(raiz);
             }
-	    }
-	}
-    //continua
-	if((*raiz)->info == valor){
-	    if(((*raiz)->esq == NULL || (*raiz)->dir == NULL)){// n� tem 1 filho ou nenhum
-			struct no_arvore *oldNode = (*raiz);
-			if((*raiz)->esq != NULL)
+        }
+    }else{
+        printf("Encontrado o participante %s para remocao\n", nome);
+        if((*raiz)->esq == NULL || (*raiz)->dir == NULL){// Nó tem 1 filho ou nenhum
+            printf("Removendo o no com 1 filho ou nenhum\n");
+            struct no_arvore *oldNode = (*raiz);
+            if((*raiz)->esq != NULL)
                 *raiz = (*raiz)->esq;
             else
                 *raiz = (*raiz)->dir;
-			free(oldNode);
-		}else { // n� tem 2 filhos
-			struct no_arvore* temp = procuraMenor((*raiz)->dir);
-			(*raiz)->info = temp->info;
-			remove_ArvAVL(&(*raiz)->dir, (*raiz)->info);
+            free(oldNode);
+        }else {
+            printf("Encontrado o participante %s com dois filhos para remocao\n", nome);
+            struct no_arvore* temp = procuraMenorNome((*raiz)->dir);
+            strcpy((*raiz)->nome, temp->nome);
+            printf("Substituindo o participante %s pelo menor filho %s da subarvore direita\n", nome, temp->nome);
+            remove_ArvAVL(&(*raiz)->dir, (*raiz)->nome);
             if(fatorBalanceamento_NO(*raiz) >= 2){
-				if(altura_NO((*raiz)->esq->dir) <= altura_NO((*raiz)->esq->esq))
-					RotacaoLL(raiz);
-				else
-					RotacaoLR(raiz);
-			}
-		}
-		if (*raiz != NULL)
-            (*raiz)->altura = maior(altura_NO((*raiz)->esq),altura_NO((*raiz)->dir)) + 1;
-		return 1;
-	}
+                printf("Realizando rotacao de balanceamento na raiz %s\n", (*raiz)->nome);
+                if(altura_NO((*raiz)->esq->dir) <= altura_NO((*raiz)->esq->esq))
+                    RotacaoLL(raiz);
+                else
+                    RotacaoLR(raiz);
+            }
+        }
+        if (*raiz != NULL)
+            (*raiz)->altura = maior(altura_NO((*raiz)->esq), altura_NO((*raiz)->dir)) + 1;
+        return 1;
+    }
 
-	(*raiz)->altura = maior(altura_NO((*raiz)->esq),altura_NO((*raiz)->dir)) + 1;
+    (*raiz)->altura = maior(altura_NO((*raiz)->esq), altura_NO((*raiz)->dir)) + 1;
 
-	return res;
+    return res;
 }
