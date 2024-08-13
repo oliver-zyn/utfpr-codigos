@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Produtos</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/estilo.css">
+
+</head>
+
+<body>
+
+    <!-- Formulário para adicionar produtos -->
+  
+    <div class="msg container-fluid" id="msg"></div>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 mx-auto">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">
+                            Cadastro de Produtos
+                        </h4>
+                    </div>
+                    <div class="card-body">
+                        <form method="post" id="form-add" action="">
+                            <div class="form-group mt-2">
+                                <label for="name">Produto</label>
+                                <input type="text" id="name" name="name"
+                                    class="form-control validar name" />
+                            </div>
+                            <div class="form-group mt-2">
+                                <label for="price">Preço</label>
+                                <input type="text" id="price" name="price"
+                                    class="form-control validar price" />
+                            </div>
+                           
+                            <div class="mt-2">
+                                <input type="submit" value="Salvar" class="btn btn-danger" name="btAdd" id="btSave" />
+                            </div>
+                            
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div id="mensagem-sucesso" style="display: none;"></div>
+            
+            <div class="center mt-5">
+              <a href="produtos.html" class="btn btn-outline-danger">Acessar Produtos</a>  
+            </div>
+            </div>
+        <script src="js/main.js"></script>
+</body>
+
+</html>
