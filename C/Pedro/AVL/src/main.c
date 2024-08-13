@@ -39,28 +39,29 @@ int main(){
     printf("\nInsercoes de resultados!\n");
 
     do {
-        printf("\nResultado da partida %d:\n", i);
-        i += 1;
-        printf("\nDigite o nome do primeiro participante: ");
-        gets(nome1);
-        fflush(stdin);
-        printf("Digite o resultado do primeiro participante (Rodadas Vencidas do Adversario): ");
-        scanf("%d", &resultado1);
-        fflush(stdin);
+        printf("\nIncluir resultado de partida:\n");
+        printf("Nome do primeiro competidor: ");
+        scanf("%s", nome1);
+        printf("Nome do segundo competidor: ");
+        scanf("%s", nome2);
+        printf("Nome do participante vencedor: ");
+        scanf("%s", nome_vencedor);
+        
+        // Atualiza a pontuação conforme o nome do vencedor
+        if (strcmp(nome_vencedor, nome1) == 0) {
+            alteraPontuacao_Participante(arvore, nome1, 'v');
+            alteraPontuacao_Participante(arvore, nome2, 'p');
+        } else if (strcmp(nome_vencedor, nome2) == 0) {
+            alteraPontuacao_Participante(arvore, nome1, 'p');
+            alteraPontuacao_Participante(arvore, nome2, 'v');
+        } else {
+            printf("Nome do vencedor inválido!\n");
+            continue;
+        }
 
-        printf("\nDigite o nome do segundo participante: ");
-        gets(nome2);
-        fflush(stdin);
-        printf("Digite o resultado do segundo participante (Rodadas Vencidas do Adversario): ");
-        scanf("%d", &resultado2);
-        fflush(stdin);
-
-        resultadoPontuacao(avl, nome1, resultado1, nome2, resultado2);
-
-        printf("\nDeseja adicionar outro resultado? (S/N): ");
-        scanf(" %c", &continuar1);
-        fflush(stdin);
-    } while (continuar1 == 'S' || continuar1 == 's');
+        printf("Deseja incluir outro resultado de partida? (S/N): ");
+        scanf(" %c", &opcao);
+    } while (opcao == 'S' || opcao == 's'); 
 
     printf("\nImpressao da arvore AVL - em ordem:\n");
     emOrdem_ArvAVL(avl, "Raiz");
