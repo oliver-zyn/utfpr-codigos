@@ -1,18 +1,19 @@
 #ifndef ARVOREB_H_INCLUDED
 #define ARVOREB_H_INCLUDED
 
-#define M 3 //M refere-se à ordem da árvore, ou seja, quantos filhos cada nó pode ter
-            //M-1 é o número máximo de chaves que um nó pode ter
+#define M 3 //M refere-se ï¿½ ordem da ï¿½rvore, ou seja, quantos filhos cada nï¿½ pode ter
+            //M-1 ï¿½ o nï¿½mero mï¿½ximo de chaves que um nï¿½ pode ter
 
 typedef struct node Node;
 typedef enum statusChave StatusChave;
+typedef struct pessoas Pessoas;
 
-Node * inserirNo(Node *raiz, int chave);
-StatusChave ins(Node *ptr, int chave, int *chaveIni, Node **novoNo);
-void busca(Node *raiz, int chave);
-int buscaChave(Node *raiz, int chave, int *chaves_arr, int n);
-void excluirNo(Node *raiz, int chave);
-StatusChave del(Node *raiz, Node *ptr, int chave);
+Node * inserirNo(Node *raiz, char nome[100]);
+StatusChave ins(Node *ptr, char nome[100], char nomeInicial[100], Node **novoNo);
+void busca(Node *raiz, char nome[100]);
+int buscaChave(Node *raiz, char nome[100], Pessoas *chaves_arr, int n);
+void excluirNo(Node *raiz, char nome[100]);
+StatusChave del(Node *raiz, Node *ptr, char nome[100]);
 void imprime_arvore(Node *ptr, int nivel);
 void imprime_no(Node *ptr);
 
