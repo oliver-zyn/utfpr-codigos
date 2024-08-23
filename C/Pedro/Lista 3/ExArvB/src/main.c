@@ -35,6 +35,7 @@ int main() {
                             raiz = inserirNo(raiz, valor);
                             ptr = strtok(NULL, delimitador); //breaks string str into a series of tokens using the delimiter delim.
                         }
+                        
                         break;
                 case 2:
                         printf("Informe a chave a ser removida: ");
