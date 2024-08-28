@@ -3,15 +3,15 @@
 #include <string.h>
 #include "../include/ArvoreB.h"
 
-struct pessoas
+struct playlist
 {
-	char nome[100];
+	char musica_Pedro[100];
 };
 
 struct node
 {
 	int n;			   /* n < M No. de chaves no n� sempre � menor que a ordem da �rvore B*/
-	Pessoas nomes[M - 1]; /*array de chaves*/
+	Playlist nomes[M - 1]; /*array de chaves*/
 	struct node *p[M]; /* array de ponteiros */
 };
 
@@ -37,7 +37,7 @@ Node *inserirNo(Node *raiz, char nome[100])
 		Node *raizIni = raiz;
 		raiz = (Node *)malloc(sizeof(Node));
 		raiz->n = 1;
-		strcpy(raiz->nomes[0].nome, nomeInicial);
+		strcpy(raiz->nomes[0].musica_Pedro, nomeInicial);
 		raiz->p[0] = raizIni;
 		raiz->p[1] = novoNo;
 	} /*Fim if */
@@ -58,7 +58,7 @@ StatusChave ins(Node *ptr, char nome[100], char nomeInicial[100], Node **novoNo)
 	}
 	n = ptr->n;
 	pos = buscaChave(ptr, nome, ptr->nomes, n);
-	if (pos < n && strcmp(nome, ptr->nomes[pos].nome) == 0)
+	if (pos < n && strcmp(nome, ptr->nomes[pos].musica_Pedro) == 0)
 		return Duplicado;
 	status = ins(ptr->p[pos], nome, novoNome, &novoPtr);
 	if (status != Inseriu)
@@ -74,7 +74,7 @@ StatusChave ins(Node *ptr, char nome[100], char nomeInicial[100], Node **novoNo)
 			ptr->p[i + 1] = ptr->p[i];
 		}
 		/*chave is inserted at exact location*/
-		strcpy(ptr->nomes[pos].nome, novoNome);
+		strcpy(ptr->nomes[pos].musica_Pedro, novoNome);
 		ptr->p[pos + 1] = novoPtr;
 		++ptr->n; /*incrementing the number of chaves in node*/
 		return Sucesso;
@@ -87,18 +87,18 @@ StatusChave ins(Node *ptr, char nome[100], char nomeInicial[100], Node **novoNo)
 	}
 	else
 	{ /*If chaves in node are maximum and position of node to be inserted is not last*/
-		strcpy(ultNome, ptr->nomes[M - 2].nome);
+		strcpy(ultNome, ptr->nomes[M - 2].musica_Pedro);
 		ultPtr = ptr->p[M - 1];
 		for (i = M - 2; i > pos; i--)
 		{
 			ptr->nomes[i] = ptr->nomes[i - 1];
 			ptr->p[i + 1] = ptr->p[i];
 		}
-		strcpy(ptr->nomes[pos].nome, novoNome);
+		strcpy(ptr->nomes[pos].musica_Pedro, novoNome);
 		ptr->p[pos + 1] = novoPtr;
 	}
 	splitPos = (M - 1) / 2;
-	strcpy(nomeInicial, ptr->nomes[splitPos].nome);
+	strcpy(nomeInicial, ptr->nomes[splitPos].musica_Pedro);
 
 	(*novoNo) = (Node *)malloc(sizeof(Node)); /*Right node after split*/
 	ptr->n = splitPos;						  /*No. of chaves for left splitted node*/
@@ -109,7 +109,7 @@ StatusChave ins(Node *ptr, char nome[100], char nomeInicial[100], Node **novoNo)
 		if (i < (*novoNo)->n - 1)
 			(*novoNo)->nomes[i] = ptr->nomes[i + splitPos + 1];
 		else
-			strcpy((*novoNo)->nomes[i].nome, ultNome);
+			strcpy((*novoNo)->nomes[i].musica_Pedro, ultNome);
 			
 	}
 	(*novoNo)->p[(*novoNo)->n] = ultPtr;
@@ -125,10 +125,10 @@ void busca(Node *raiz, char nome[100])
 	{
 		n = ptr->n;
 		for (i = 0; i < ptr->n; i++)
-			printf(" %s", ptr->nomes[i].nome);
+			printf(" %s", ptr->nomes[i].musica_Pedro);
 		printf("\n");
 		pos = buscaChave(raiz, nome, ptr->nomes, n);
-		if (pos < n && strcmp(nome, ptr->nomes[pos].nome) == 0)
+		if (pos < n && strcmp(nome, ptr->nomes[pos].musica_Pedro) == 0)
 		{
 			printf("Nome %s encontrado na posicao %d do ultimo no apresentado.\n", nome, pos);
 			return;
@@ -138,10 +138,10 @@ void busca(Node *raiz, char nome[100])
 	printf("Nome %s nao encontrado.\n", nome);
 } /*Fim busca()*/
 
-int buscaChave(Node *raiz, char nome[100], Pessoas *chaves_arr, int n)
+int buscaChave(Node *raiz, char nome[100], Playlist *chaves_arr, int n)
 {
 	int pos = 0;
-	while (pos < n && strcmp(nome, chaves_arr[pos].nome) > 0)
+	while (pos < n && strcmp(nome, chaves_arr[pos].musica_Pedro) > 0)
 		pos++;
 	return pos;
 } /*Fim buscaChave()*/
@@ -169,7 +169,7 @@ void excluirNo(Node *raiz, char nome[100])
 StatusChave del(Node *raiz, Node *ptr, char nome[100])
 {
 	int pos, i, pivot, n, min;
-	Pessoas *chaves_arr;
+	Playlist *chaves_arr;
 	StatusChave status;
 	Node **p, *esq_ptr, *dir_ptr;
 
@@ -186,7 +186,7 @@ StatusChave del(Node *raiz, Node *ptr, char nome[100])
 	// p � uma folha
 	if (p[0] == NULL)
 	{
-		if (pos == n || strcmp(nome, chaves_arr[pos].nome) < 0)
+		if (pos == n || strcmp(nome, chaves_arr[pos].musica_Pedro) < 0)
 			return NaoEncontrado;
 		/*Desloca chaves e ponteiros para a esquerda*/
 		for (i = pos + 1; i < n; i++)
@@ -198,7 +198,7 @@ StatusChave del(Node *raiz, Node *ptr, char nome[100])
 	} /*Fim if */
 
 	// Se chave encontrada mas p nao � folha
-	if (pos < n && strcmp(nome, chaves_arr[pos].nome) == 0)
+	if (pos < n && strcmp(nome, chaves_arr[pos].musica_Pedro) == 0)
 	{
 		Node *qp = p[pos], *qp1;
 		int nkey;
@@ -211,7 +211,7 @@ StatusChave del(Node *raiz, Node *ptr, char nome[100])
 			qp = qp1;
 		} /*Fim while*/
 		chaves_arr[pos] = qp->nomes[nkey - 1];
-		strcpy(qp->nomes[nkey - 1].nome, nome);
+		strcpy(qp->nomes[nkey - 1].musica_Pedro, nome);
 	} /*Fim if */
 	status = del(raiz, p[pos], nome);
 	if (status != PoucasChaves)
@@ -298,9 +298,28 @@ void imprime_arvore(Node *ptr, int nivel)
 		{
 			imprime_arvore(ptr->p[i], nivel + 1);
 			printf("%s", indent);
-			printf("%s\n", ptr->nomes[i - 1].nome);
+			printf("%s\n", ptr->nomes[i - 1].musica_Pedro);
 		}
 		imprime_arvore(ptr->p[0], nivel + 1);
+	}
+}
+
+void imprime_playlist(Node *ptr, int nivel)
+{
+	if (ptr != NULL)
+	{
+		char indent[10] = "";
+		for (int i = 0; i < nivel; i++)
+		{
+			strcat(indent, "\n");
+		}
+
+		for (int i = ptr->n; i > 0; i--)
+		{
+			imprime_playlist(ptr->p[i], nivel + 1);
+			printf("Musica %s\n", ptr->nomes[i - 1].musica_Pedro);
+		}
+		imprime_playlist(ptr->p[0], nivel + 1);
 	}
 }
 
@@ -310,7 +329,7 @@ void imprime_no(Node *ptr)
 	{
 		for (int i = 0; i < ptr->n; i++)
 		{
-			printf("%s", ptr->nomes[i].nome);
+			printf("%s", ptr->nomes[i].musica_Pedro);
 		}
 		printf("\n");
 	}

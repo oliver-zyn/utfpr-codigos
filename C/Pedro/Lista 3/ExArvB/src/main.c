@@ -13,7 +13,7 @@ int main() {
 
         Node *raiz = NULL;
 
-        printf("Criacao de Arvore-B de ordem %d, ou seja, nos com %d filhos, e no maximo %d nomes:\n", M, M, M - 1);
+        printf("Criacao de Arvore-B de ordem %d, ou seja, nos com %d filhos, e no maximo %d musicas:\n", M, M, M - 1);
         while (1) {
                 printf("\n1.Inserir\n");
                 printf("2.Remover\n");
@@ -31,7 +31,7 @@ int main() {
                         //quebra a string de entrada
                         ptr = strtok(l, delimitador);
                         while(ptr != NULL) {
-							strcpy(valor, ptr);
+			    strcpy(valor, ptr);
                             raiz = inserirNo(raiz, valor);
                             ptr = strtok(NULL, delimitador); //breaks string str into a series of tokens using the delimiter delim.
                         }
@@ -52,6 +52,8 @@ int main() {
                         imprime_arvore(raiz, 0);
                         break;
                 case 5:
+                        printf("\nPlaylist armazenada na Arvore-B de ordem %d em ordem reversa:\n\n", M);
+                        imprime_playlist(raiz, 0);
                         exit(1);
                 default:
                         printf("Opcao invalida.\n");
