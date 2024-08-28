@@ -78,48 +78,34 @@ void algPRIM(Grafo *gr, int orig, int *pai) {
     free(visitado);
 }
 
-const char* getLocalidade(int localidade) {
-    switch (localidade) {
-        case 0: return "Brasil";
-        case 1: return "Bahia";
-        case 2: return "USA";
-        case 3: return "Japao";
-        case 4: return "XiqueXique";
-        case 5: return "Ilha da Pindaia";
-        default: return "Localidade desconhecida";
+const char* getName(int nome) {
+    switch (nome) {
+        case 0: return "Maria";
+        case 1: return "Viagens";
+        case 2: return "Beltrano";
+        case 3: return "Tecnologia";
+        case 4: return "Investimentos";
+        case 5: return "Fulano";
+        case 6: return "Futebol";
+        case 7: return "Joao";
+        case 8: return "Negocios";
+        default: return "Vertice desconhecido";
     }
 }
 
-void imprimePaiLocalidade(int *pai, int n, Grafo *gr) {
-    printf("Localidades com custo:\n");
+void imprimePaiName(int *pai, int n, Grafo *gr) {
+    printf("De investimentos menor caminho para todos os vertices:\n\n");
     for (int i = 0; i < n; i++) {
         if (pai[i] != -1) {
             for (int j = 0; j < gr->grau[pai[i]]; j++) {
                 if (gr->arestas[pai[i]][j] == i) {
-                    printf("De %s para %s o custo eh %.2f\n", getLocalidade(pai[i]), getLocalidade(i), gr->pesos[pai[i]][j]);
+                    printf("De %s para %s o custo eh %.2f\n", getName(pai[i]), getName(i), gr->pesos[pai[i]][j]);
                     break;
                 }
             }
         }
     }
 }
-
-void imprimePai(int *pai, int n, Grafo *gr) {
-    printf("Vetor Pai (arestas da MST):\n");
-    for (int i = 0; i < n; i++) {
-        if (pai[i] != -1) {
-            // Encontra a aresta que conecta o vértice i ao seu pai
-            for (int j = 0; j < gr->grau[pai[i]]; j++) {
-                if (gr->arestas[pai[i]][j] == i) {
-                    printf("%d - %d (%.2f)\n", pai[i], i, gr->pesos[pai[i]][j]);
-                    break;
-                }
-            }
-        }
-    }
-}
-
-
 
 void libera_Grafo(Grafo* gr){
     if(gr != NULL){
@@ -195,13 +181,24 @@ void imprime_Grafo(Grafo *gr){
     }
 }
 
-/*
-Algoritmos para Grafos em C
- via Sedgewick
-http://www.ime.usp.br/~pf/algoritmos_para_grafos/
-*/
-// https://www.cs.auckland.ac.nz/software/AlgAnim/dijkstra.html
-// http://www.cprogramming.com/tutorial/computersciencetheory/dijkstra.html
+void imprime_GrafoName(Grafo *gr) {
+    if(gr == NULL)
+        return;
+
+    int i, j;
+    for(i = 0; i < gr->nro_vertices; i++) {
+        printf("%s: ", getName(i));  // Usando getName para imprimir o nome do vértice
+        for(j = 0; j < gr->grau[i]; j++) {
+            if(gr->eh_ponderado)
+                printf("%s(%.2f), ", getName(gr->arestas[i][j]), gr->pesos[i][j]);
+            else
+                printf("%s, ", getName(gr->arestas[i][j]));
+        }
+        printf("\n");
+    }
+}
+
+
 int procuraMenorDistancia(float *dist, int *visitado, int NV){
     int i, menor = -1, primeiro = 1;
     for(i=0; i < NV; i++){
@@ -253,8 +250,6 @@ void menorCaminho_Grafo(Grafo *gr, int ini, int *ant, float *dist){
     free(visitado);
 }
 
-
-// http://www.ime.usp.br/~pf/algoritmos_para_grafos/aulas/dfs1.html
 void buscaProfundidade(Grafo *gr, int ini, int *visitado, int cont){
     int i;
     visitado[ini] = cont;
@@ -302,35 +297,4 @@ void buscaLargura_Grafo(Grafo *gr, int ini, int *visitado){
     for(i=0; i < gr->nro_vertices; i++)
         printf("%d -> %d\n",i,visitado[i]);
 }
-
-/* OUTRA VERS�O
-void buscaLargura_Grafo(Grafo *gr, int ini, int *visitado){
-    int i, vert, NV, cont = 1;
-    int *pilha, IP = 0, FP = 0;
-    for(i=0; i<gr->nro_vertices; i++)
-        visitado[i] = 0;
-
-    NV = gr->nro_vertices;
-    pilha = (int*) malloc(NV * sizeof(int));
-    FP++;
-    pilha[FP] = ini;
-    while(IP != FP){
-        IP = (IP + 1) % NV;
-        vert = pilha[IP];
-        if(!visitado[vert]){
-            visitado[vert] = cont;
-            cont++;
-            for(i=0; i<gr->grau[vert]; i++){
-                if(!visitado[gr->arestas[vert][i]]){
-                    FP = (FP + 1) % NV;
-                    pilha[FP] = gr->arestas[vert][i];
-                }
-            }
-        }
-    }
-    free(pilha);
-    for(i=0; i < gr->nro_vertices; i++)
-        printf("%d -> %d\n",i,visitado[i]);
-}
-*/
 

@@ -13,10 +13,10 @@ void buscaLargura_Grafo(Grafo *gr, int ini, int *visitado);
 void menorCaminho_Grafo(Grafo *gr, int ini, int *antecessor, float *distancia);
 
 void algPRIM(Grafo *gr, int orig, int *pai);
-void imprimePai(int *pai, int n, Grafo *gr);
-void imprimePaiLocalidade(int *pai, int n, Grafo *gr);
-const char* getLocalidade(int localidade);
+void imprimePaiName(int *pai, int n, Grafo *gr);
+const char* getName(int localidade);
 
 void imprime_Grafo(Grafo *gr);
+void imprime_GrafoName(Grafo *gr);
 
-void algKruskal(Grafo *gr, int orig, int *pai);
+void algPRIM(Grafo *gr, int orig, int *pai);
