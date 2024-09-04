@@ -308,12 +308,6 @@ void imprime_playlist(Node *ptr, int nivel)
 {
 	if (ptr != NULL)
 	{
-		char indent[10] = "";
-		for (int i = 0; i < nivel; i++)
-		{
-			strcat(indent, "\n");
-		}
-
 		for (int i = ptr->n; i > 0; i--)
 		{
 			imprime_playlist(ptr->p[i], nivel + 1);
