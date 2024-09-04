@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "*.css": "css",
+        "arvoreb.h": "c",
+        "itemlistaenc.h": "c",
+        "stdlib.h": "c"
+    }
+}
