@@ -4,16 +4,16 @@
 #include "../include/ArvoreB.h"
 
 int main() {
-        int chave;
+        char nome[100];
         int opcao;
         char delimitador[] = "-";
         char *ptr;
-        int valor;
+        char valor[100];
         char l[1000];
 
         Node *raiz = NULL;
 
-        printf("Criacao de Arvore-B de ordem %d, ou seja, nos com %d filhos, e no maximo %d chaves:\n", M, M, M - 1);
+        printf("Criacao de Arvore-B de ordem %d, ou seja, nos com %d filhos, e no maximo %d musicas:\n", M, M, M - 1);
         while (1) {
                 printf("\n1.Inserir\n");
                 printf("2.Remover\n");
@@ -25,34 +25,35 @@ int main() {
 
                 switch (opcao) {
                 case 1:
-
-                        raiz = NULL;
-                        printf("\nDigite as chaves a serem inseridas, separadas por hifen (sem espa�o).\n");
-                        printf("Exemplo: 1-3-5-2-7-9-21-6\n");
+                        printf("\nDigite os nomes a serem inseridos, separados por hifen (sem espaco).\n");
+                        printf("Exemplo: pedro-oliver-ana\n");
                         scanf("%s", l);
                         //quebra a string de entrada
                         ptr = strtok(l, delimitador);
                         while(ptr != NULL) {
-                            valor = atoi(ptr);
+			    strcpy(valor, ptr);
                             raiz = inserirNo(raiz, valor);
                             ptr = strtok(NULL, delimitador); //breaks string str into a series of tokens using the delimiter delim.
                         }
+                        
                         break;
                 case 2:
                         printf("Informe a chave a ser removida: ");
-                        scanf("%d", &chave); //eatline();
-                        excluirNo(raiz, chave);
+                        scanf("%s", nome);
+                        excluirNo(raiz, nome);
                         break;
                 case 3:
                         printf("Informe a chave a ser procurada: ");
-                        scanf("%d", &chave); //eatline();
-                        busca(raiz, chave);
+                        scanf("%s", nome);
+                        busca(raiz, nome);
                         break;
                 case 4:
                         printf("Impressao da Arvore-B de ordem %d:\n", M);
                         imprime_arvore(raiz, 0);
                         break;
                 case 5:
+                        printf("\nPlaylist armazenada na Arvore-B de ordem %d em ordem reversa:\n\n", M);
+                        imprime_playlist(raiz, 0);
                         exit(1);
                 default:
                         printf("Opcao invalida.\n");
