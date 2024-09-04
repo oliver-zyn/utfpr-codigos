@@ -280,6 +280,9 @@ void imprime_no(Node *ptr) {
 
 const char* getName(int nome) {
     switch (nome) {
+        case 5000: return "Notbook ACER";
+        case 2500: return "Air Condicioner ElitAr";
+        case 1500: return "Tablet Samsung X2M";
         case 1250: return "Anel de Diamante | 0.9lab";
         case 1000: return "Ticket PREMIUM | League Futball";
         case 975: return "Bolsa de couro GUCCI";
@@ -294,43 +297,43 @@ const char* getName(int nome) {
     }
 }
 
-void imprime_inventario(Node *ptr, int nivel)
+void imprime_inventario(Node *ptr, int nivel, int benca)
 {
 	if (ptr != NULL)
 	{
 		for (int i = ptr->n; i > 0; i--)
 		{
-			imprime_inventario(ptr->p[i], nivel + 1);
-			printf("%s: R$ %d\n", getName(ptr->chaves[i - 1]), ptr->chaves[i - 1]);
+			imprime_inventario(ptr->p[i], nivel + 1, benca);
+            printf("%s: R$ %d\n", getName((ptr->chaves[i - 1]) - benca), ptr->chaves[i - 1]);
 		}
-		imprime_inventario(ptr->p[0], nivel + 1);
+		imprime_inventario(ptr->p[0], nivel + 1, benca);
 	}
 }
 
-int roda_roleta(int saldo, int preco) {
+float roda_roleta(float saldo, float preco) {
     // 5 itens diferentes na roleta
-    int roleta[7] = {1, 2, 3, 4, 5, 6, 7};
+    int roleta[9] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
 
     // Simula as 3 casas da roleta
-    int casa1 = roleta[rand() % 7];
-    int casa2 = roleta[rand() % 7];
-    int casa3 = roleta[rand() % 7];
+    int casa1 = roleta[rand() % 9];
+    int casa2 = roleta[rand() % 9];
+    int casa3 = roleta[rand() % 9];
 
     printf("\nResultado da roleta: %d | %d | %d\n", casa1, casa2, casa3);
 
     // Verifica os resultados
     if (casa1 == casa2 && casa2 == casa3) {
-        printf("Parabens! Voce ganhou 5X o valor apostado! :() \n");
-        saldo += preco * 5;
-        printf("\nGANHOU: R$ %d", preco * 5);
+        printf("Parabens! Voce ganhou 700%% do valor apostado! :() \n");
+        saldo += preco * 7;
+        printf("\nGANHOU: R$ %.2f", preco * 7);
     } else if (casa1 == casa2 || casa2 == casa3 || casa1 == casa3) {
-        printf("Dois itens iguais! Dobrou o seu dinheiro. :) \n");
-        saldo += preco * 2;
-        printf("\nGanhou: R$ %d", preco * 2);
+        printf("Dois itens iguais! Ganhou 220%% do seu dinheiro. :) \n");
+        saldo += preco * 2.2;
+        printf("\nGanhou: R$ %.2f", preco * 2.2);
     } else {
-        printf("Itens diferentes! Voce perdeu o valor apostado. \nQue azar! :( \n");
-        saldo -= preco;
-        printf("\nPerdeu: R$ %d", preco);
+        printf("Itens diferentes! Voce perdeu 80%% do valor apostado. \nQue azar! :( \n");
+        saldo -= preco * 0.80;
+        printf("\nPerdeu: R$ %.2f", preco * 0.80);
     }
 
     return saldo;
@@ -349,3 +352,52 @@ int buscaValor(Node *raiz, int chave) {
     }
     return 0;
 }/*Fim busca()*/
+
+int geraValor() {
+    // Definindo os valores possíveis, incluindo 0
+    int valores[] = {0, 5, 10, 25, 50, 100, 250, 2000};
+    // Definindo as probabilidades cumulativas (em milésimos de porcentagem)
+    double probabilidades[] = {50.0, 500.0, 700.0, 800.0, 950.0, 990.0, 999.999, 1000.0};
+    // Gerando um número aleatório entre 0 e 1000 (para simular a probabilidade)
+    double randNum = (double)rand() / RAND_MAX * 1000.0;
+
+    // Verifica em qual intervalo o número aleatório se encaixa
+    for (int i = 0; i < 8; i++) {
+        if (randNum < probabilidades[i]) {
+            return valores[i];
+        }
+    }
+
+    // Em caso de erro (não esperado), retorna 0
+    return 0;
+}
+
+int geraValorNegativo() {
+    // Definindo os valores possíveis, incluindo valores negativos
+    int valores[] = {-25, -10, -5, 0};
+    // Definindo as probabilidades cumulativas (em milésimos de porcentagem)
+    double probabilidades[] = {50.0, 950.0, 1400.0, 1500.0};
+    // Gerando um número aleatório entre 0 e 1500 (para simular a probabilidade)
+    double randNum = (double)rand() / RAND_MAX * 1500.0;
+
+    // Verifica em qual intervalo o número aleatório se encaixa
+    for (int i = 0; i < 4; i++) {
+        if (randNum < probabilidades[i]) {
+            return valores[i];
+        }
+    }
+    // Em caso de erro (não esperado), retorna 1
+    return 1;
+}
+
+Node* atualizaArvore(Node* ptr, int soma) {
+    if (ptr != NULL) {
+        for (int i = 0; i < ptr->n; i++) {
+            ptr->chaves[i] += soma;  // Multiplica a chave pelo parâmetro
+        }
+        for (int i = 0; i <= ptr->n; i++) {
+            ptr->p[i] = atualizaArvore(ptr->p[i], soma);  // Atualiza os filhos
+        }
+    }
+    return ptr;  // Retorna o nó atualizado
+}
