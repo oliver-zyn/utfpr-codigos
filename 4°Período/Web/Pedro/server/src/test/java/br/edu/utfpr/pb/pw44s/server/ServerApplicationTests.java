@@ -1,10 +1,10 @@
-package com.pedrosauthier.firstProj;
+package br.edu.utfpr.pb.pw44s.server;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class FirstProjApplicationTests {
+class ServerApplicationTests {
 
 	@Test
 	void contextLoads() {
