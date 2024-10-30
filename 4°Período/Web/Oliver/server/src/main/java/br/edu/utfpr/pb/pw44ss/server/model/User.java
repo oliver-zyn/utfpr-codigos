@@ -1,9 +1,9 @@
 package br.edu.utfpr.pb.pw44ss.server.model;
 
 import java.util.Collection;
-import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import jakarta.persistence.Entity;
@@ -46,6 +46,6 @@ public class User implements UserDetails {
 
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
-    return List.of();
+    return AuthorityUtils.createAuthorityList("ROLE_USER");
   }
 }
