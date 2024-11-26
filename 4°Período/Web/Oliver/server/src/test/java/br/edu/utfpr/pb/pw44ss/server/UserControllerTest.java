@@ -9,8 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.test.context.ActiveProfiles;
 
-import br.edu.utfpr.pb.pw44ss.server.model.User;
-import br.edu.utfpr.pb.pw44ss.server.repository.UserRepository;
+import br.edu.utfpr.pb.pw44s.server.model.User;
+import br.edu.utfpr.pb.pw44s.server.repository.UserRepository;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
